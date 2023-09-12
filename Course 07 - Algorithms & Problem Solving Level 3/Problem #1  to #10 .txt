@@ -1,0 +1,665 @@
+# Problem 1 :  
+
+void FillMatrixWithRandomNumber(int arr[3][3])
+{
+	
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			arr[i][j] = MyOperationsLib::RandomNumber(1,100);
+		}
+	}
+
+
+}
+
+void PrintMatrixWithRandomNumber(int arr[3][3])
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			cout << setw(3) << arr[i][j] << "   ";
+		}
+		cout << endl;
+	}
+}
+
+
+
+
+
+الإستدعاء : 
+
+	srand((unsigned)time(NULL));
+
+	int arr[3][3];
+
+	FillMatrixWithRandomNumber(arr);
+
+	cout << "\n The following is a 3x3 random matrix :\n";
+	PrintMatrixWithRandomNumber(arr);
+
+
+
+***********************************************************************************************************
+
+
+# Problem 2 :  
+
+
+void FillMatrixWithRandomNumber(int arr[3][3], short Rows, short Columns)
+{
+	
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			arr[i][j] = MyOperationsLib::RandomNumber(1,100);
+
+		}
+	}
+
+
+}
+
+void PrintMatrixWithRandomNumber(int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			cout << setw(3) << arr[i][j] << "   ";
+		}
+		cout << endl;
+	}
+}
+
+int RowSum(int arr[3][3], short RowNumber, short columns)
+{
+	int SumRow = 0;
+
+	for (int i = 0; i < columns; i++)
+	{
+		SumRow += arr[RowNumber][i];
+	}
+
+	return SumRow;
+
+}
+
+void PrintEachRowSum(int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		cout << "Row " << i + 1 << " Sum = " << RowSum(arr, i, Columns) << endl;
+	}
+}
+
+
+الإستدعاء : 
+
+
+	srand((unsigned)time(NULL));
+
+	int arr[3][3];
+
+	
+
+	FillMatrixWithRandomNumber(arr, 3, 3 );
+
+	cout << "\n The following is a 3x3 random matrix :\n";
+	PrintMatrixWithRandomNumber(arr,3,3);
+
+	PrintEachRowSum(arr, 3, 3);
+
+
+
+***********************************************************************************************************
+
+
+# Problem 3 :  
+
+
+void FillMatrixWithRandomNumber(int arr[3][3], short Rows, short Columns)
+{
+	
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			arr[i][j] = MyOperationsLib::RandomNumber(1,100);
+
+		}
+	}
+
+
+}
+
+void PrintMatrixWithRandomNumber(int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			cout << setw(3) << arr[i][j] << "   ";
+		}
+		cout << endl;
+	}
+}
+
+int RowSum(int arr[3][3], short RowNumber, short columns)
+{
+	int SumRow = 0;
+
+	for (int i = 0; i < columns; i++)
+	{
+		SumRow += arr[RowNumber][i];
+	}
+
+	return SumRow;
+
+}
+
+void SumMatrixRowsInArray(int arr[3][3],int arrSum[3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		arrSum[i] = RowSum(arr, i, Columns);
+	}
+
+	
+
+}
+
+
+void PrintRowsSumArray(int arr[3], short Rows)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		cout << "Row " << i + 1 << " Sum = " << arr[i] << endl;
+	}
+}
+
+
+
+الإستدعاء : 
+
+
+	srand((unsigned)time(NULL));
+
+	int arr[3][3],arrSum[3];
+
+	
+
+	FillMatrixWithRandomNumber(arr, 3, 3 );
+
+	cout << "\n The following is a 3x3 random matrix :\n";
+	PrintMatrixWithRandomNumber(arr,3,3);
+
+	SumMatrixRowsInArray(arr, arrSum, 3, 3);
+	PrintRowsSumArray(arrSum, 3);
+
+
+***********************************************************************************************************
+
+
+# Problem 4 :  
+
+
+void FillMatrixWithRandomNumber(int arr[3][3], short Rows, short Columns)
+{
+
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			arr[i][j] = MyOperationsLib::RandomNumber(1, 100);
+
+		}
+	}
+
+
+}
+
+void PrintMatrixWithRandomNumber(int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			cout << setw(3) << arr[i][j] << "   ";
+		}
+		cout << endl;
+	}
+}
+
+int SumColum (int arr[3][3] ,int Rows,int ColumnNumber)
+{
+	int ColumnSum = 0;
+
+	for (int i = 0; i < Rows; i++)
+	{
+		ColumnSum += arr[i][ColumnNumber];
+	}
+
+	return ColumnSum;
+}
+
+void PrintEachColumnSum(int arr[3][3], int Rows, int Column)
+{
+	for (int i = 0; i < Column; i++)
+	{
+		cout << "Column " << i + 1 << " Sum = " << SumColum(arr, Rows, i) << endl;
+	}
+}
+
+
+
+الإستدعاء : 
+
+
+srand((unsigned)time(NULL));
+
+	int arr[3][3];
+
+	FillMatrixWithRandomNumber(arr, 3, 3);
+
+	cout << "\nThe following is a 3x3 random matrix : \n";
+	PrintMatrixWithRandomNumber(arr, 3, 3);
+	
+	cout << "\nThe following are sum of each column in the matrix :\n";
+	PrintEachColumnSum(arr, 3, 3);
+
+
+
+***********************************************************************************************************
+
+
+# Problem 5 :  
+
+
+void FillMatrixWithRandomNumber(int arr[3][3], short Rows, short Columns)
+{
+
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			arr[i][j] = MyOperationsLib::RandomNumber(1, 100);
+
+		}
+	}
+
+
+}
+
+void PrintMatrixWithRandomNumber(int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			cout << setw(3) << arr[i][j] << "   ";
+		}
+		cout << endl;
+	}
+}
+
+int SumColum (int arr[3][3] ,int Rows,int ColumnNumber)
+{
+	int ColumnSum = 0;
+
+	for (int i = 0; i < Rows; i++)
+	{
+		ColumnSum += arr[i][ColumnNumber];
+	}
+
+	return ColumnSum;
+}
+
+void SumMatrixColumnInArray(int arr[3][3],int arrSum[3], int Rows, int Columns)
+{
+	for (int i = 0; i < Columns; i++)
+	{
+		arrSum[i] = SumColum(arr, Rows, i);
+
+		
+	}
+}
+
+void PrintRowsSumArray(int arr[3], short Columns)
+{
+	for (int i = 0; i < Columns; i++)
+	{
+		cout << "Column " << i + 1 << " Sum = " << arr[i] << endl;
+	}
+}
+
+
+الإستدعاء : 
+
+
+	srand((unsigned)time(NULL));
+
+	int arr[3][3],arrSum[3];
+
+	FillMatrixWithRandomNumber(arr, 3, 3);
+
+	cout << "\nThe following is a 3x3 random matrix : \n";
+	PrintMatrixWithRandomNumber(arr, 3, 3);
+	
+	cout << "\nThe following are sum of each column in the matrix :\n";
+	SumMatrixColumnInArray(arr,arrSum, 3, 3);
+	PrintRowsSumArray(arrSum, 3);
+
+
+***********************************************************************************************************
+
+
+# Problem 6 :  
+
+
+void FillMatrixOrderNumber(int arr[3][3], short Rows, short Column)
+{
+	short Counter = 0;
+
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Column; j++)
+		{
+			Counter++;
+
+			arr[i][j] = Counter;
+		}
+	}
+}
+
+void PrintMatrix(int arr[3][3], short Rows, short Column)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Column; j++)
+		{
+			cout << arr[i][j] << "  ";
+		}
+
+		cout << endl;
+	}
+}
+
+
+الإستدعاء : 
+
+
+	int arr[3][3];
+	
+	FillMatrixOrderNumber(arr, 3, 3);
+	cout << "The following is a 3x3 ordered matrix : \n" ;
+	PrintMatrix(arr, 3, 3);
+
+
+
+***********************************************************************************************************
+
+
+# Problem 7 :  
+
+
+
+void FillMatrixOrderNumber(int arr[3][3], short Rows, short Columns)
+{
+	short Counter = 0;
+
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			Counter++;
+
+			arr[i][j] = Counter;
+		}
+	}
+}
+
+void PrintMatrix(int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			cout << arr[i][j] << "  ";
+		}
+
+		cout << endl;
+	}
+}
+
+void FillTransposeMatrix(int arr[3][3],int arrTranspose[3][3], short Rows, short Columns)
+{
+	
+
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			arrTranspose[i][j] = arr[j][i];
+		}
+	}
+
+}
+
+
+
+الإستدعاء : 
+
+int arr[3][3], arrTranspose[3][3];
+	
+	FillMatrixOrderNumber(arr, 3, 3);
+	cout << "The following is a 3x3 ordered matrix : \n" ;
+	PrintMatrix(arr, 3, 3);
+
+	FillTransposeMatrix(arr, arrTranspose, 3, 3);
+	cout << "\nThe following is a 3x3 Transpose matrix : \n";
+	PrintMatrix(arrTranspose, 3, 3);
+
+
+
+***********************************************************************************************************
+
+
+
+# Problem 8 :  
+
+
+void FillMatrixWithRandomNumber(int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			arr[i][j] = MyOperationsLib::RandomNumber(1, 10);
+		}
+	}
+}
+
+void PrintMatrix (int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			printf("%0*d ", 2, arr[i][j]);
+		}
+		cout << endl;
+	}
+}
+
+void Multiply2Matrix(int arrMatrix1[3][3], int arrMatrix2[3][3], int arrMatrixResult[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			arrMatrixResult[i][j] = arrMatrix1[i][j] * arrMatrix2[i][j];
+		}
+	}
+}
+
+
+
+الإستدعاء : 
+
+
+srand((unsigned)time(NULL));
+
+	
+	int arrMatrix1[3][3], arrMatrix2[3][3], arrMatrixResult[3][3];
+
+	
+	
+	FillMatrixWithRandomNumber(arrMatrix1, 3, 3);
+	cout << "Matrex 1 : \n";
+	PrintMatrix(arrMatrix1, 3, 3);
+
+	FillMatrixWithRandomNumber(arrMatrix2, 3, 3);
+	cout << "\nMatrex 2 : \n";
+	PrintMatrix(arrMatrix2, 3, 3);
+
+	Multiply2Matrix(arrMatrix1, arrMatrix2, arrMatrixResult, 3, 3);
+	cout << "\nMatrex Result : \n";
+	PrintMatrix(arrMatrixResult, 3, 3);
+
+
+***********************************************************************************************************
+
+
+
+# Problem 9 :  
+
+
+void FillMatrixWithRandomNumber(int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			arr[i][j] = MyOperationsLib::RandomNumber(1, 10);
+		}
+	}
+}
+
+void PrintMatrix(int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			printf("%0*d ", 2, arr[i][j]);
+		}
+		cout << endl;
+	}
+}
+
+void PrintMiddleRowMatrix(int arr[3][3], short Rows, short Columns)
+{
+	short MiddleRows = Rows / 2;
+
+	for (int i = 0; i < Columns; i++)
+	{
+		printf("%0*d  ", 2, arr[MiddleRows][i]);
+	}
+}
+
+void PrintMiddleColumnsMatrix(int arr[3][3], short Rows, short Columns)
+{
+	short MiddleColumns = Columns / 2;
+	for (int i = 0; i < Rows; i++)
+	{
+		printf("%0*d  ", 2, arr[i][MiddleColumns]);
+	}
+}
+
+
+
+الإستدعاء : 
+
+
+srand((unsigned)time(NULL));
+
+	int arr[3][3];
+
+	FillMatrixWithRandomNumber(arr, 3, 3);
+	cout << "The following is a 3x3 random matrix : \n";
+	PrintMatrix(arr, 3, 3);
+
+	cout << "Middle Row of Matrix is : \n";
+	PrintMiddleRowMatrix(arr, 3,3);
+	cout << "\nMiddle Colum of Matrix is : \n";
+	PrintMiddleColumnsMatrix(arr, 3,3);
+
+
+***********************************************************************************************************
+
+
+
+# Problem 10 :  
+
+
+void FillMatrixWithRandomNumber(int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			arr[i][j] = MyOperationsLib::RandomNumber(1, 10);
+		}
+	}
+}
+
+void PrintMatrix(int arr[3][3], short Rows, short Columns)
+{
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			printf("%0*d ", 2, arr[i][j]);
+		}
+		cout << endl;
+	}
+}
+
+
+int SumAllMatrix(int arr[3][3], int Rows, int Columns)
+{
+	int SumMatrix = 0;
+
+	for (int i = 0; i < Rows; i++)
+	{
+		for (int j = 0; j < Columns; j++)
+		{
+			SumMatrix += arr[i][j];
+		}
+	}
+	return SumMatrix;
+}
+
+
+
+الإستدعاء : 
+
+
+	srand((unsigned)time(NULL));
+
+	int arr[3][3];
+
+	FillMatrixWithRandomNumber(arr, 3, 3);
+	cout << "The following is a 3x3 random matrix : \n";
+	PrintMatrix(arr, 3, 3);
+
+	cout << "\nSum Of Matrix is : " << SumAllMatrix(arr,3,3) << endl;
+
+
+***********************************************************************************************************

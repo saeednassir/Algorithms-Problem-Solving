@@ -1,0 +1,237 @@
+// Problem 36 :
+
+enum enOperationType{Add = '+', Subtract = '-',
+    Multiply = '*', Divide = '/' };
+
+float ReadNumber(string Message)
+{
+    float Number = 0;
+    cout << Message << endl;
+    cin >> Number;
+
+    return Number;
+}
+
+enOperationType ReadOpType()
+{
+    char OT = '+';
+
+    cout << "Please enter Operation Type ( +, -, *, / ) ? \n";
+    cin >> OT;
+
+    return (enOperationType)OT;
+}
+
+float Calculate(float Number1, float Number2, enOperationType OpType)
+{
+    switch (OpType)
+    {
+    case enOperationType::Add:
+            return Number1 + Number2;
+    case enOperationType::Subtract:
+        return Number1 - Number2;
+    case enOperationType::Multiply:
+        return Number1 * Number2;
+    case enOperationType::Divide:
+        return Number1 / Number2;
+    default:
+        return Number1 + Number2;
+    }
+
+}
+
+
+
+
+الاستدعاء : 
+
+    float Number1 = ReadNumber("Please enter Number1 ?");
+    float Number2 = ReadNumber("Please enter Number2 ?");
+   
+    enOperationType OpType = ReadOpType();
+
+    cout << "Result = " << Calculate(Number1, Number2, OpType);
+
+
+
+****************************************************************************
+
+// Problem 37 :
+
+
+float ReadNumber(string Message)
+{
+    float Num;
+    cout << Message << endl;
+    cin >> Num;
+
+    return Num;
+}
+
+
+float SumNumber()
+{
+    int Sum = 0,Number = 0,Counter = 1;
+
+    do
+    {
+        Number = ReadNumber("Please enter Number " + to_string(Counter));
+        if (Number == -99)
+        {
+            break;
+        }
+
+        Sum += Number;        
+        Counter++;
+
+    }while (Number != -99);
+
+    return Sum;
+}
+
+
+
+
+الاستدعاء : 
+
+
+  cout << endl << "Rsult of sum is " << SumNumber();
+
+****************************************************************************
+
+
+// Problem 38 :
+
+
+enum enPrimeNotPrime{Prime = 1, NotPrime =2};
+
+float ReadPositiveNumber(string Message)
+{
+	float Number = 0;
+	do
+	{
+		cout << Message << endl;
+		cin >> Number;
+	} while (Number <= 0);
+
+	return Number;
+}
+
+enPrimeNotPrime CheckPrime(int Number)
+{
+    int M = round(Number / 2);
+
+	for (int Counter  = 2; Counter <= M; Counter ++)
+	{
+		if (Number % Counter == 0)
+			return enPrimeNotPrime::NotPrime;
+
+	}
+
+	return enPrimeNotPrime::Prime;
+
+}
+
+void PrintNumberType(int Number)
+{
+	switch (CheckPrime(Number))
+	{
+	case enPrimeNotPrime::Prime:
+		cout << "The number is Prime\n";
+		break;
+	case enPrimeNotPrime::NotPrime:
+		cout << "The number is Not Prime\n";
+		break;
+	}
+
+}
+
+
+
+الاستدعاء : 
+
+
+PrintNumberType(ReadPositiveNumber("Please enter a positive number?"));
+
+
+****************************************************************************
+
+
+
+// Problem 39 :
+
+
+
+float ReadPositiveNumber(string Message)
+{
+	float Number = 0;
+	do
+	{
+		cout << Message << endl;
+		cin >> Number;
+	} while (Number <= 0);
+
+	return Number;
+}
+
+float CalculateRemainder(float TotalBill, float TotalCashPaid)
+{
+	return TotalCashPaid - TotalBill;
+}
+
+
+
+الاستدعاء : 
+
+	float TotalBill = ReadPositiveNumber("Please enter Total Bill ?");
+	float TotalCashPaid = ReadPositiveNumber("Please enter Total Cash Paid ?");
+
+	cout << endl;
+	cout << "Total Bill = " << TotalBill << endl;
+	cout << "Total Cash Paid = " << TotalCashPaid << endl;
+
+	cout << "************************************\n";
+	cout << "Remainder = " << CalculateRemainder(TotalBill, TotalCashPaid) << endl;;
+
+
+
+****************************************************************************
+
+// Problem 40 :
+
+
+
+float ReadPositiveNumber(string Message)
+{
+	float Number = 0;
+	do
+	{
+		cout << Message << endl;
+		cin >> Number;
+	} while (Number <= 0);
+
+	return Number;
+}
+
+float TotalBillAfterServiceAndTax(float TotalBill)
+{
+	TotalBill = TotalBill * 1.1;
+	TotalBill = TotalBill * 1.16;
+
+	return TotalBill;
+}
+
+
+
+الاستدعاء : 
+
+	float TotalBill = ReadPositiveNumber("Please Enter Total Bill ?");
+
+	cout << endl;
+	cout << "Total Bill = " << TotalBill << endl;
+	cout << "Total Bill After Sevice Fee and Sales Tax = "
+		<< TotalBillAfterServiceAndTax(TotalBill) << endl;
+
+
+
+****************************************************************************

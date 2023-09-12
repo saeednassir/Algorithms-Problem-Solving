@@ -1,0 +1,186 @@
+// Problem 21 :
+
+float ReadCircumference()
+{
+    float L;
+    cout << "Please enter Circumference ? \n";
+    cin >> L;
+
+    return L;
+}
+
+float CircleAreaByCircumference(float L)
+{
+    float Area;
+    const float PI = 3.14;
+    Area = pow(L, 2) / (4 * PI); 
+    return Area;
+}
+
+void PrintResult(float Area)
+{
+    cout << "\nCircle Area is " << Area << endl;
+}
+
+// الاستدعاء : 
+
+PrintResult(CircleAreaByCircumference(ReadCircumference()));
+
+****************************************************************************
+// Problem 22 :
+
+void ReadTriangleData(float& A, float& B)
+{
+    
+    cout << "Please enter triangle side A ? \n";
+    cin >> A;
+
+    cout << "Please enter triangle side B ? \n";
+    cin >> B;
+    
+}
+
+float CircleAreaByITriangle(float A,float B)
+{
+    float Area;
+    const float PI = 3.14;
+    Area = PI * (pow(B, 2) / 4) * ((2 * A - B) / (2 * A + B));
+    return Area;
+}
+
+void PrintResult(float Area)
+{
+    cout << "\nCircle Area is " << Area << endl;
+}
+
+
+// الاستدعاء :
+
+    float A, B;
+
+    ReadTriangleData (A, B);
+
+    PrintResult(CircleAreaByITriangle(A,B));
+
+
+****************************************************************************
+// Problem 23 :
+
+
+void ReadTriangleData(float& A, float& B,float& C)
+{
+    
+    cout << "Please enter triangle side A ? \n";
+    cin >> A;
+
+    cout << "Please enter triangle side B ? \n";
+    cin >> B;
+    
+    cout << "Please enter triangle side C ? \n";
+    cin >> C;
+}
+
+float CircleAreaByTriangle(float A,float B,float C)
+{ 
+    float Area;
+    const float PI = 3.14;
+    float P = (A + B + C) / 2;
+    float T = (A * B * C) / (4 * sqrt(P * (P - A) * (P - B) * (P - C)));
+    Area = PI * pow(T, 2);
+     
+    return Area;
+}
+
+void PrintResult(float Area)
+{
+    cout << "\nCircle Area is " << Area << endl;
+}
+
+
+// الاستدعاء :  
+
+    float A, B, C;
+
+    ReadTriangleData (A,B,C);
+
+    PrintResult(CircleAreaByTriangle(A,B,C));
+
+
+****************************************************************************
+// Problem 24 :
+
+int ReadAge()
+{
+    int Age;
+    cout << "Please enter your Age ? \n";
+    cin >> Age;
+
+    return Age;
+}
+
+
+bool ValidateNumberInRange(int Number, int From, int To)
+{
+    return (Number >= From && Number <= To);
+}
+
+void PrintResult(int Age)
+{
+    if (ValidateNumberInRange(Age, 18, 45))
+        cout << Age << " is a valid age \n";
+    else
+        cout << Age << " is invalid age \n";
+}
+
+
+// الاستدعاء : 
+
+ PrintResult(ReadAge());
+
+
+
+****************************************************************************
+// Problem 25 :
+
+
+int ReadAge()
+{
+    int Age;
+    cout << "Please enter your Age ? \n";
+    cin >> Age;
+
+    return Age;
+}
+
+
+bool ValidateNumberInRange(int Number, int From, int To)
+{
+    return (Number >= From && Number <= To);
+}
+
+int ReadUnitlAgeBetween(int From, int To)
+{
+    int Age = 0;
+
+    do
+    {
+       Age = ReadAge();
+
+    } while (!ValidateNumberInRange(Age,From,To));
+
+    return Age;
+}
+
+void PrintResult(int Age)
+{
+        cout << "Your Age is : " << Age << endl;
+
+}
+
+
+// الاستدعاء : 
+
+PrintResult(ReadUnitlAgeBetween(18,45));
+   
+
+*****************************************************************************

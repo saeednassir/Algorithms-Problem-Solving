@@ -1,0 +1,939 @@
+# Problem 11 :  
+
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+bool IsLeapYear(int Year)
+{
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+}
+
+short NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (short i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+
+short NumberOfDaysFromTheBeginingOfTheYear(short Year, short Month, short Day)
+{
+	short TotalDay = 0;
+
+	for (short i = 1; i <= Month-1; i++)
+	{
+		TotalDay += NumberOfDaysInMonth(Year, i);
+	}
+
+	TotalDay += Day;
+
+	return TotalDay;
+}
+
+stDate GetDateFromDayOrderInYear(short DaysOrderInYear, short Year)
+{
+	stDate Date;
+	short RemainingDays = DaysOrderInYear;
+	short MonthDays = 0;
+
+	Date.Year = Year;
+	Date.Month = 1;
+
+	while (true)
+	{
+		MonthDays = NumberOfDaysInMonth(Year, Date.Month);
+
+		if (RemainingDays > MonthDays)
+		{
+			RemainingDays -= MonthDays;
+			Date.Month++;
+		}
+		else
+		{
+			Date.Day = RemainingDays;
+			break;
+		}
+
+	}
+
+	return Date;
+}
+
+
+الإستدعاء : 
+
+ 
+    short Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+    short Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+    short Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+	short DaysOrderInYear = NumberOfDaysFromTheBeginingOfTheYear(Year, Month, Day);
+	
+	cout << "Number Of Days from the begining of the year is " 
+		<< DaysOrderInYear << endl;
+
+	stDate Date;
+
+	Date = GetDateFromDayOrderInYear(DaysOrderInYear, Year);
+	cout << "Date for [" << DaysOrderInYear << "] is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+
+
+***************************************************************************************************************
+
+
+
+# Problem 12 :  
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+bool IsLeapYear(int Year)
+{
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+}
+
+short NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (short i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+
+short NumberOfDaysFromTheBeginingOfTheYear(short Year, short Month, short Day)
+{
+	short TotalDay = 0;
+
+	for (short i = 1; i <= Month-1; i++)
+	{
+		TotalDay += NumberOfDaysInMonth(Year, i);
+	}
+
+	TotalDay += Day;
+
+	return TotalDay;
+}
+
+stDate DateAddDays(stDate Date, short Days)
+{
+	short RemainingDays = Days + NumberOfDaysFromTheBeginingOfTheYear(Date.Year, Date.Month, Date.Day);
+	short MonthDays = 0;
+
+	Date.Month = 1;
+
+	while (true)
+	{
+		MonthDays = NumberOfDaysInMonth(Date.Year, Date.Month);
+
+		if (RemainingDays > MonthDays)
+		{
+			RemainingDays -= MonthDays;
+			Date.Month++;
+
+			if (Date.Month > 12)
+			{
+				Date.Month = 1;
+				Date.Year++;
+			}
+		}
+		else
+		{
+			Date.Day = RemainingDays;
+			break;
+		}
+	}
+
+	return Date;
+
+}
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+
+
+الإستدعاء : 
+
+
+        stDate Date = ReadFullDate();
+	short Days = MyInputLib::ReadPositiveNumber("How many days to add ?");
+
+	Date = DateAddDays(Date,Days);
+	cout << "Date after adding [" << Days << "] days is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+
+
+***************************************************************************************************************
+
+
+
+# Problem 13 :  
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
+{
+
+	/* حلي
+	if (Date1.Year < Date2.Year)
+		return true;
+	else if (Date1.Year == Date2.Year)
+	{
+		if (Date1.Month < Date2.Month)
+			return true;
+		else if (Date1.Month == Date2.Month)
+		{
+			if (Date1.Day < Date2.Day)
+				return true;
+		}
+
+		return false;
+	}*/
+
+
+	return (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month ? Date1.Day < Date2.Day : false)) : false);
+
+
+}
+
+
+
+
+الإستدعاء : 
+
+
+        stDate Date1 = ReadFullDate();
+	stDate Date2 = ReadFullDate();
+
+	if (IsDate1BeforeDate2(Date1,Date2))
+		cout << "\nYes, Date1 is less than Date2.";
+	else
+		cout << "\nNo, Date1 is Not less than Date2.";
+
+
+***************************************************************************************************************
+
+
+
+
+# Problem 14 :  
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+bool IsDate1EqualDate2(stDate Date1, stDate Date2)
+{
+	/*حلي
+	return (Date1.Year != Date2.Year) ? false : 
+		(Date1.Month != Date2.Month) ? false : 
+		(Date1.Day != Date2.Day) ? false : true;
+		*/
+
+	return (Date1.Year = Date2.Year) ? ((Date1.Month == Date2.Month) ? ((Date1.Day == Date2.Day) ? true :false) : false): false;
+
+}
+
+
+
+الإستدعاء : 
+
+
+	stDate Date1 = ReadFullDate();
+	stDate Date2 = ReadFullDate();
+
+	if (IsDate1EqualDate2(Date1,Date2))
+		cout << "\nYes, Date1 is Equal Date2.";
+	else
+		cout << "\nNo, Date1 is Not Equal than Date2.";
+
+
+***************************************************************************************************************
+
+
+
+
+# Problem 15 :  
+
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+bool IsLeapYear(int Year)
+{
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+}
+
+int NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (int i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.Day == NumberOfDaysInMonth(Date.Year, Date.Month));
+}
+
+bool IsLastMonthInYear(short Month)
+{
+	return (Month == 12); 
+}
+
+
+الإستدعاء : 
+
+
+stDate Date = ReadFullDate();
+
+	if (IsLastDayInMonth(Date))
+		cout << "Yes, Day is last day in month.\n";
+	else
+		cout << "No, Day is Not last day in month.\n";
+
+	if (IsLastMonthInYear(Date.Month))
+		cout << "Yes, Month is last Month in Year.\n";
+	else
+		cout << "No, Month is Not last Month in Year.\n";
+
+
+***************************************************************************************************************
+
+
+
+# Problem 16 :  
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+bool IsLeapYear(int Year)
+{
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+}
+
+int NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (int i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.Day == NumberOfDaysInMonth(Date.Year, Date.Month));
+}
+
+bool IsLastMonthInYear(short Month)
+{
+	return (Month == 12); 
+}
+
+stDate IncreaseDateByOneDay(stDate Date)
+{
+	if (IsLastDayInMonth(Date))
+	{
+		if (IsLastMonthInYear(Date.Month))
+		{
+			Date.Day = 1;
+			Date.Month = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
+	}
+	else
+	{
+		Date.Day++;
+	}
+
+	return Date;
+}
+
+
+
+الإستدعاء : 
+
+
+stDate Date = ReadFullDate();
+
+	Date = IncreaseDateByOneDay(Date);
+	cout << "Date after adding one day is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+
+
+***************************************************************************************************************
+
+
+# Problem 17 :  
+
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+bool IsLeapYear(int Year)
+{
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+
+}
+
+bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
+{
+	return (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month ? Date1.Day < Date2.Day : false)) : false);
+
+}
+
+int NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (int i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.Day == NumberOfDaysInMonth(Date.Year, Date.Month));
+}
+
+bool IsLastMonthInYear(short Month)
+{
+	return (Month == 12);
+}
+
+stDate IncreaseDateByOneDay(stDate Date)
+{
+	if (IsLastDayInMonth(Date))
+	{
+		if (IsLastMonthInYear(Date.Month))
+		{
+			Date.Day = 1;
+			Date.Month = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
+	}
+	else
+	{
+		Date.Day++;
+	}
+
+	return Date;
+}
+
+int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
+{
+	int Days = 0;
+
+	while (IsDate1BeforeDate2(Date1,Date2))
+	{
+		Days++;
+		Date1 = IncreaseDateByOneDay(Date1);
+	}
+
+	return IncludeEndDay ? ++Days : Days;
+}
+
+
+الإستدعاء : 
+
+
+stDate Date1 = ReadFullDate();
+	stDate Date2 = ReadFullDate();
+
+	cout << "\nDinffrence is : "
+		<< GetDifferenceInDays(Date1, Date2) << " Days(s).";
+
+	cout << "\nDinffrence (Including End Day) is : "
+		<< GetDifferenceInDays(Date1, Date2,true) << " Days(s).";
+
+
+***************************************************************************************************************
+
+
+
+# Problem 18 :  
+
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+bool IsLeapYear(int Year)
+{
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+
+}
+
+bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
+{
+	return (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month ? Date1.Day < Date2.Day : false)) : false);
+
+}
+
+int NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (int i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.Day == NumberOfDaysInMonth(Date.Year, Date.Month));
+}
+
+bool IsLastMonthInYear(short Month)
+{
+	return (Month == 12);
+}
+
+stDate IncreaseDateByOneDay(stDate Date)
+{
+	if (IsLastDayInMonth(Date))
+	{
+		if (IsLastMonthInYear(Date.Month))
+		{
+			Date.Day = 1;
+			Date.Month = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
+	}
+	else
+	{
+		Date.Day++;
+	}
+
+	return Date;
+}
+
+int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
+{
+	int Days = 0;
+
+	while (IsDate1BeforeDate2(Date1,Date2))
+	{
+		Days++;
+		Date1 = IncreaseDateByOneDay(Date1);
+	}
+
+	return IncludeEndDay ? ++Days : Days;
+}
+
+stDate GetSystemDate()
+{
+	stDate Date;
+
+	time_t t = time(0);
+	tm* now = localtime(&t);
+
+	Date.Year = now->tm_year + 1900;
+	Date.Month = now->tm_mon + 1;
+	Date.Day = now->tm_mday;
+
+	return Date;
+
+}
+
+الإستدعاء : 
+
+
+	cout << "\nPlease Enter Your Date of Birth :\n";
+	stDate Date1 = ReadFullDate();
+
+	stDate Date2 =GetSystemDate();
+
+	cout << "\nYour Age is : "
+		<< GetDifferenceInDays(Date1, Date2,true) << " Days(s).";
+
+
+***************************************************************************************************************
+
+
+
+# Problem 19 :  
+
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+bool IsLeapYear(int Year)
+{
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+
+}
+
+bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
+{
+	return (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month ? Date1.Day < Date2.Day : false)) : false);
+
+}
+
+int NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (int i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.Day == NumberOfDaysInMonth(Date.Year, Date.Month));
+}
+
+bool IsLastMonthInYear(short Month)
+{
+	return (Month == 12);
+}
+
+stDate IncreaseDateByOneDay(stDate Date)
+{
+	if (IsLastDayInMonth(Date))
+	{
+		if (IsLastMonthInYear(Date.Month))
+		{
+			Date.Day = 1;
+			Date.Month = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
+	}
+	else
+	{
+		Date.Day++;
+	}
+
+	return Date;
+}
+
+void SwapDates(stDate& Date1, stDate& Date2)
+{
+	stDate TempDate;
+
+	TempDate.Day = Date1.Day;
+	TempDate.Month = Date1.Month;
+	TempDate.Year = Date1.Year;
+
+	Date1.Day = Date2.Day;
+	Date1.Month = Date2.Month;
+	Date1.Year = Date2.Year;
+
+	Date2.Day = TempDate.Day;
+	Date2.Month = TempDate.Month;
+	Date2.Year = TempDate.Year;
+	
+}
+
+int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
+{
+	/*
+	int Days = 0;
+
+	if (IsDate1BeforeDate2(Date1, Date2))
+	{
+		while (IsDate1BeforeDate2(Date1, Date2))
+		{
+			Days++;
+			Date1 = IncreaseDateByOneDay(Date1);
+		}
+
+		return IncludeEndDay ? ++Days : Days;
+	}
+	else
+	{
+		while (IsDate1BeforeDate2(Date2, Date1))
+		{
+			Days--;
+			Date2 = IncreaseDateByOneDay(Date2);
+		}
+
+		return IncludeEndDay ? --Days : Days;
+	}*/
+
+	int Days = 0;
+	short SwapFlagValue = 1;
+
+	if (!IsDate1BeforeDate2(Date1, Date2))
+	{
+		// Swap Dates
+		SwapDates(Date1, Date2);
+		SwapFlagValue = -1;
+
+	}
+
+	while (IsDate1BeforeDate2(Date1, Date2))
+	{
+		Days++;
+		Date1 = IncreaseDateByOneDay(Date1);
+	}
+
+	
+	return IncludeEndDay ? ++Days * SwapFlagValue : Days * SwapFlagValue;
+
+	
+}
+
+
+الإستدعاء : 
+
+
+	stDate Date1 = ReadFullDate();
+	stDate Date2 = ReadFullDate();
+
+	cout << "\nDinffrence is : "
+		<< GetDifferenceInDays(Date1, Date2) << " Days(s).";
+
+	cout << "\nDinffrence (Including End Day) is : "
+		<< GetDifferenceInDays(Date1, Date2, true) << " Days(s).";
+
+
+***************************************************************************************************************

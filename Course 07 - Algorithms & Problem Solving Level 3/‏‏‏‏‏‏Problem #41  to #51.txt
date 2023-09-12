@@ -1,0 +1,1145 @@
+# Problem 41 : 
+
+string ReverseWordsInString(string Str)
+{
+	string Text = "";
+	vector<string> vString;
+
+	vString = MyStringLib::SplitString(Str, " ");
+
+	vector<string>::iterator iter = vString.end();
+
+	while (iter != vString.begin())
+	{
+		--iter;
+		Text += *iter + " ";
+	}
+
+	Text = Text.substr(0, Text.length() - 1); // remove last space.
+
+	return Text;
+
+}
+
+
+
+الاستدعاء : 
+
+string Str = MyInputLib::ReadString("please enter string ?");
+
+	cout << "\nString after reversing words :";
+	cout << endl << ReverseWordsInString(Str);
+
+
+
+				*********************************
+
+#حلي :
+
+string ReverseWordsInString(string Str)
+{
+	string Text = "";
+	vector<string> vString;
+
+	vString = MyStringLib::SplitString(Str, " ");
+
+	short SizeVector = vString.size();
+	for (string& S : vString)
+	{
+		if (SizeVector != -1)
+		{
+			Text += (vString[SizeVector - 1] + " ");
+
+			SizeVector--;
+		}
+	}
+	return Text;
+
+}
+
+
+الاستدعاء : 
+
+	string Str = MyInputLib::ReadString("please enter string ?");
+
+	cout << "\nString after reversing words :";
+	cout << endl << ReverseWordsInString(Str);
+		
+
+***********************************************************************************************************
+
+
+# Problem 42 : 
+
+string ReplaceWordInStringUsingBuiltInFuncation(string Str,string StringToReplace , string sReplaceTo)
+{
+	short Pos = Str.find(StringToReplace);
+
+	while (Pos != string::npos)
+	{
+		Str = Str.replace(Pos, StringToReplace.length(), sReplaceTo);
+		Pos = Str.find(StringToReplace); //find text.
+	}
+
+	return Str;
+}
+
+
+
+الاستدعاء : 
+
+
+	string Str = MyInputLib::ReadString("please enter string ?");
+
+	cout << "\nReplace String :";
+	cout << endl << ReplaceWordInStringUsingBuiltInFuncation(Str,"saeed","ali");
+	
+
+***********************************************************************************************************
+
+
+
+# Problem 43 : 
+
+string ReplaceWordInStringUseSplit(string Str, string StringToReplace, string sToReplace,bool MatchCase = true)
+{
+	vector<string> vString;
+	vString = MyStringLib::SplitString(Str, " ");
+
+	string UpperStringToReplace = MyStringLib::UpperAllString(StringToReplace);
+
+
+	for (string& S : vString)
+	{
+		if (MatchCase)
+		{
+			if (S == StringToReplace)
+				S = sToReplace;
+		}
+		else
+		{
+			if (MyStringLib::UpperAllString(S) == UpperStringToReplace)
+				S = sToReplace;
+		}
+		
+	}
+
+	return MyStringLib::JoinString(vString, " ");
+
+}
+
+
+
+الاستدعاء : 
+
+	string Str = MyInputLib::ReadString("please enter string ?");
+
+	cout << "\nReplace With Match Case:";
+	cout << endl << ReplaceWordInStringUseSplit(Str,"saeed","ali");
+
+	cout << "\nReplace With Not Match Case :";
+	cout << endl << ReplaceWordInStringUseSplit(Str, "saeed", "ali", false);
+
+
+***********************************************************************************************************
+
+
+
+
+# Problem 44 : 
+
+
+string RemoveAllPunctuation(string Str)
+{
+	string Str2 = "";
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+		if (!ispunct(Str[i]))
+			Str2 += Str[i];	
+	}
+
+	return Str2;
+}
+
+
+الاستدعاء : 
+
+
+	string Str = MyInputLib::ReadString("please enter string ?");
+
+	cout << "\nPunctuation Removed : \n";
+
+	cout << RemoveAllPunctuation(Str) << endl;
+
+
+***********************************************************************************************************
+
+
+
+
+# Problem 45 : 
+
+struct stClientData
+{
+	string AccountNumber;
+	string PinCode;
+	string Name;
+	string Phone; 
+	double AccountBalance;
+};
+
+
+stClientData ReadNewClint()
+{
+	stClientData ClientData;
+
+	cout << "Enter Account Number? ";
+
+	// Usage of std::ws will extract allthe whitespace character .
+	getline(cin >> ws, ClientData.AccountNumber);
+
+	cout << "Enter  PinCode? ";
+	getline(cin, ClientData.PinCode);
+
+	cout << "Enter  Name? ";
+	getline(cin, ClientData.Name);
+
+	cout << "Enter  Phone? ";
+	getline(cin, ClientData.Phone);
+
+	cout << "Enter  Account Balance? ";
+	cin >> ClientData.AccountBalance;
+
+	return ClientData;
+}
+
+string ConvertRecordToLine(stClientData ClientData, string Seperator = "#//#")
+{
+	string stClientRecord = "";
+
+	stClientRecord += ClientData.AccountNumber + Seperator;
+	stClientRecord += ClientData.PinCode + Seperator;
+	stClientRecord += ClientData.Name + Seperator;
+	stClientRecord += ClientData.Phone + Seperator;
+	stClientRecord += to_string(ClientData.AccountBalance);
+
+	return stClientRecord;
+
+}
+
+
+
+الاستدعاء : 
+
+
+
+	cout << "\nPlease enter client Data : \n";
+
+	stClientData ClientData;
+
+	ClientData = ReadNewClint();
+
+	cout << "\n\nClient Record for Saving is :\n";
+	cout << ConvertRecordToLine(ClientData);
+
+
+***********************************************************************************************************
+
+
+
+
+# Problem 46 : 
+
+
+struct stClientData
+{
+	string AccountNumber;
+	string PinCode;
+	string Name;
+	string Phone; 
+	double AccountBalance;
+};
+
+stClientData ConvertLineToRecord(string Line, string Seperator = "#//#")
+{
+	stClientData ClientData;
+
+	vector<string> vClientData;
+	vClientData = MyStringLib::SplitString(Line,Seperator);
+
+	ClientData.AccountNumber = vClientData[0];
+	ClientData.PinCode = vClientData[1];
+	ClientData.Name = vClientData[2];
+	ClientData.Phone = vClientData[3];
+	ClientData.AccountBalance = stod(vClientData[4]);
+
+	return ClientData;
+
+}
+
+void PrintClientRecord(stClientData ClientData)
+{
+	cout << "\n\nThe follwing is the extractd client record :\n\n";
+
+	cout << "Account Number : " << ClientData.AccountNumber << endl;
+	cout << "PinCode        : " << ClientData.PinCode << endl;
+	cout << "Name           : " << ClientData.Name << endl;
+	cout << "Phone          : " << ClientData.Phone << endl;
+	cout << "Account Balance: " << ClientData.AccountBalance << endl;
+
+}
+
+
+الاستدعاء : 
+
+
+	string stLine = "A150#//#1234#//#saeed nassir#//#0599269523#//#5270.120000";
+	cout << "Line Record is :\n";
+	cout << stLine;
+
+	stClientData ClientData;
+
+	ClientData = ConvertLineToRecord(stLine);
+
+	PrintClientRecord(ClientData);
+
+
+***********************************************************************************************************
+
+
+
+
+# Problem 47 : 
+
+const string ClientsFileName = "Clients.txt";
+
+struct stClientData
+{
+	string AccountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AccountBalance;
+};
+
+stClientData ReadNewClint()
+{
+	stClientData ClientData;
+
+	cout << "Enter Account Number? ";
+
+	// Usage of std::ws will extract allthe whitespace character .
+	getline(cin >> ws, ClientData.AccountNumber);
+
+	cout << "Enter  PinCode? ";
+	getline(cin, ClientData.PinCode);
+
+	cout << "Enter  Name? ";
+	getline(cin, ClientData.Name);
+
+	cout << "Enter  Phone? ";
+	getline(cin, ClientData.Phone);
+
+	cout << "Enter  Account Balance? ";
+	cin >> ClientData.AccountBalance;
+
+
+	return ClientData;
+}
+
+string ConvertRecordToLine(stClientData ClientData, string Seperator = "#//#")
+{
+	string stClientRecord = "";
+
+	stClientRecord += ClientData.AccountNumber + Seperator;
+	stClientRecord += ClientData.PinCode + Seperator;
+	stClientRecord += ClientData.Name + Seperator;
+	stClientRecord += ClientData.Phone + Seperator;
+	stClientRecord += to_string(ClientData.AccountBalance);
+
+	return stClientRecord;
+
+}
+
+void AddDataLineToFile(string FileName, string stDataLine)
+{
+	fstream MyFile;
+
+	MyFile.open(FileName, ios::out | ios::app);
+
+	if (MyFile.is_open())
+	{
+		MyFile << stDataLine << endl;
+
+		MyFile.close();
+	}
+
+	
+}
+
+void AddNewClient()
+{
+	stClientData ClientData;
+
+	ClientData = ReadNewClint();
+
+	AddDataLineToFile(ClientsFileName, ConvertRecordToLine(ClientData));
+	
+}
+
+void AddClients()
+{
+	char AddMoreClient = 'Y';
+
+	do
+	{
+		system("cls");
+		cout << "Add New Client : \n\n";
+
+		AddNewClient();
+		cout << "Client Added Successfully, do you want to add more Clients ? Y/N ?";
+		cin >> AddMoreClient;
+
+	} while (AddMoreClient == 'Y' || AddMoreClient == 'y');
+}
+
+
+الاستدعاء : 
+
+AddClients();
+
+
+***********************************************************************************************************
+
+
+
+# Problem 48 : 
+
+
+const string ClientsFileName = "Clients.txt";
+
+struct stClientData
+{
+	string AccountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AccountBalance;
+};
+
+stClientData ConvertLineToRecord(string Line, string Seperator = "#//#")
+{
+	stClientData ClientData;
+
+	vector<string> vClientData;
+	vClientData = MyStringLib::SplitString(Line, Seperator);
+
+	ClientData.AccountNumber = vClientData[0];
+	ClientData.PinCode = vClientData[1];
+	ClientData.Name = vClientData[2];
+	ClientData.Phone = vClientData[3];
+	ClientData.AccountBalance = stod(vClientData[4]);
+
+	return ClientData;
+
+}
+
+vector<stClientData> LoadClientsDataFromFile(string FileName)
+{
+	vector<stClientData> vClientsData;
+
+	fstream MyFile;
+
+	MyFile.open(FileName, ios::in); //Read Mode.
+
+	if (MyFile.is_open())
+	{
+		string Line;
+		stClientData ClientData;
+		
+		while (getline(MyFile,Line))
+		{
+			ClientData = ConvertLineToRecord(Line);
+
+			vClientsData.push_back(ClientData);
+		}
+		MyFile.close();
+	}
+
+	return vClientsData;
+}
+
+void PrintClientRecord(stClientData ClientData)
+{
+	
+	cout << "| " << left <<setw(16) << ClientData.AccountNumber;
+	cout << "| " << left << setw(10) << ClientData.PinCode ;
+	cout << "| " << left << setw(40) << ClientData.Name ;
+	cout << "| " << left << setw(12) << ClientData.Phone;
+	cout << "| " << left << setw(12) << ClientData.AccountBalance << endl;
+
+}
+
+void PrintAllClientsData(vector<stClientData> vClientData)
+{
+	cout << "\n\t\t\t\t\tClient List (" << vClientData.size() << ") Client(s).\n";
+	cout << "_____________________________________________";
+	cout << "_______________________________________________________\n\n";
+
+	cout << "| " << left << setw(16) << " Account Number ";
+	cout << "| " << left << setw(10) << " Pin Code ";
+	cout << "| " << left << setw(40) << " Client Name ";
+	cout << "| " << left << setw(12) << " Phone ";
+	cout << "| " << left << setw(12) << " Balance ";
+
+	cout << "\n________________________________________________________";
+	cout << "____________________________________________\n\n";
+
+	for (int i = 0; i < vClientData.size(); i++)
+	{
+		PrintClientRecord(vClientData[i]);
+	}
+
+	cout << "\n_________________________________________________";
+	cout << "___________________________________________________\n\n";
+
+}
+
+
+الاستدعاء : 
+
+vector<stClientData> vClientData;
+	vClientData = LoadClientsDataFromFile(ClientsFileName);
+
+	PrintAllClientsData(vClientData);
+
+
+***********************************************************************************************************
+
+
+
+# Problem 49 : 
+
+
+const string ClientsFileName = "Clients.txt";
+
+struct stClientData
+{
+	string AccountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AccountBalance;
+};
+
+stClientData ConvertLineToRecord(string Line, string Seperator = "#//#")
+{
+	stClientData stClient;
+	vector<string> vString;
+
+	vString = MyStringLib::SplitString(Line, Seperator);
+
+	stClient.AccountNumber = vString[0];
+	stClient.PinCode = vString[1];
+	stClient.Name = vString[2];
+	stClient.Phone = vString[3];
+	stClient.AccountBalance = stod(vString[4]);
+	
+	return stClient;
+}
+
+vector<stClientData> LoadClientsDataFromFile(string FileName)
+{
+	vector<stClientData> vClients;
+
+	fstream MyFile;
+
+	MyFile.open(FileName, ios::in);
+
+	if (MyFile.is_open())
+	{
+		string Line;
+		stClientData Client;
+
+		while (getline(MyFile,Line))
+		{
+			Client = ConvertLineToRecord(Line);
+
+			vClients.push_back(Client);
+
+		}
+
+		MyFile.close();
+	}
+
+	return vClients;
+
+}
+
+bool FindClientByAccountNumber(string AccountNumber, stClientData & Client)
+{
+	vector<stClientData> vClients = LoadClientsDataFromFile(ClientsFileName);
+
+	for (stClientData & C : vClients)
+	{
+		if (C.AccountNumber == AccountNumber)
+		{
+			Client = C;
+
+			return true;
+		}
+
+	}
+
+	return false;
+}
+
+void PrintClientCard(stClientData stClient)
+{
+	//cout << "\n\nThe follwing is the extractd client record :\n\n";
+
+	cout << "Account Number : " << stClient.AccountNumber << endl;
+	cout << "PinCode        : " << stClient.PinCode << endl;
+	cout << "Name           : " << stClient.Name << endl;
+	cout << "Phone          : " << stClient.Phone << endl;
+	cout << "Account Balance: " << stClient.AccountBalance << endl;
+}
+
+
+
+الاستدعاء : 
+
+
+stClientData ClientData;
+
+	string AccountNumber = MyInputLib::ReadString("Please enter Account Number? ");
+
+	if(FindClientByAccountNumber(AccountNumber, ClientData))
+	{
+		PrintClientCard(ClientData);
+	}
+	else
+	{
+		cout << "Client with Account Number (" << AccountNumber << ") Not Found !\n";
+	}
+
+
+
+			*****************************************************
+# حلي : 
+const string ClientsFileName = "Clients.txt";
+
+struct stClientData
+{
+	string AccountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AccountBalance;
+};
+
+stClientData ConvertLineToRecord(string Line, string Seperator = "#//#")
+{
+	stClientData ClientData;
+
+	vector<string> vClientData;
+	vClientData = MyStringLib::SplitString(Line, Seperator);
+
+	ClientData.AccountNumber = vClientData[0];
+	ClientData.PinCode = vClientData[1];
+	ClientData.Name = vClientData[2];
+	ClientData.Phone = vClientData[3];
+	ClientData.AccountBalance = stod(vClientData[4]);
+
+	return ClientData;
+
+}
+
+vector<stClientData> LoadClientsDataFromFile(string FileName)
+{
+	vector<stClientData> vClientsData;
+
+	fstream MyFile;
+
+	MyFile.open(FileName, ios::in); //Read Mode.
+
+	if (MyFile.is_open())
+	{
+		string Line;
+		stClientData ClientData;
+		
+		while (getline(MyFile,Line))
+		{
+			ClientData = ConvertLineToRecord(Line);
+
+			vClientsData.push_back(ClientData);
+		}
+		MyFile.close();
+	}
+
+	return vClientsData;
+}
+
+short IsFindClient(vector<stClientData> vClient,string AccountNumber)
+{		
+	for (int i = 0; i < vClient.size(); i++)
+	{
+		if (AccountNumber == vClient[i].AccountNumber)
+		{
+			return i;
+		}
+	}
+	return -99;
+}
+
+void PrintClientRecord(vector<stClientData> vClient, string AccountNumber)
+{
+	short AccountNum = IsFindClient(vClient, AccountNumber);
+
+	if ( AccountNum != -99)
+	{
+		cout << "\n\nThe follwing is the extractd client record :\n\n";
+
+		cout << "Account Number : " << vClient[AccountNum].AccountNumber << endl;
+		cout << "PinCode        : " << vClient[AccountNum].PinCode << endl;
+		cout << "Name           : " << vClient[AccountNum].Name << endl;
+		cout << "Phone          : " << vClient[AccountNum].Phone << endl;
+		cout << "Account Balance: " << vClient[AccountNum].AccountBalance << endl;
+	}
+	else
+	{
+		cout << "Client with Account Number (" << AccountNumber << ") Not Found !\n";
+	}
+}
+
+
+الاستدعاء : 
+
+	vector<stClientData> vClientData;
+	vClientData = LoadClientsDataFromFile(ClientsFileName);
+
+	string AccountNumber = MyInputLib::ReadString("Please enter Acount number?");
+
+	PrintClientRecord(vClientData, AccountNumber);
+
+
+
+***********************************************************************************************************
+
+
+
+# Problem 50 : 
+
+
+const string ClientsFileName = "Clients.txt";
+
+struct stClientData
+{
+	string AccountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AccountBalance;
+	bool MarkForDelete = false;
+};
+
+stClientData ConvertLineToRecord(string Line, string Seperator = "#//#")
+{
+	stClientData stClient;
+	vector<string> vString;
+
+	vString = MyStringLib::SplitString(Line, Seperator);
+
+	stClient.AccountNumber = vString[0];
+	stClient.PinCode = vString[1];
+	stClient.Name = vString[2];
+	stClient.Phone = vString[3];
+	stClient.AccountBalance = stod(vString[4]);
+	
+	return stClient;
+}
+
+string ConvertRecordToLine(stClientData ClientData, string Seperator = "#//#")
+{
+	string stClientRecord = "";
+
+	stClientRecord += ClientData.AccountNumber + Seperator;
+	stClientRecord += ClientData.PinCode + Seperator;
+	stClientRecord += ClientData.Name + Seperator;
+	stClientRecord += ClientData.Phone + Seperator;
+	stClientRecord += to_string(ClientData.AccountBalance);
+
+	return stClientRecord;
+
+}
+
+vector<stClientData> LoadClientsDataFromFile(string FileName)
+{
+	vector<stClientData> vClients;
+
+	fstream MyFile;
+
+	MyFile.open(FileName, ios::in);
+
+	if (MyFile.is_open())
+	{
+		string Line;
+		stClientData Client;
+
+		while (getline(MyFile,Line))
+		{
+			Client = ConvertLineToRecord(Line);
+
+			vClients.push_back(Client);
+
+		}
+
+		MyFile.close();
+	}
+
+	return vClients;
+
+}
+
+bool FindClientByAccountNumber(string AccountNumber, vector<stClientData> vClients, stClientData & Client)
+{
+
+	for (stClientData & C : vClients)
+	{
+		if (C.AccountNumber == AccountNumber)
+		{
+			Client = C;
+
+			return true;
+		}
+
+	}
+
+	return false;
+}
+
+void PrintClientCard(stClientData stClient)
+{
+	//cout << "\n\nThe follwing is the extractd client record :\n\n";
+
+	cout << "Account Number : " << stClient.AccountNumber << endl;
+	cout << "PinCode        : " << stClient.PinCode << endl;
+	cout << "Name           : " << stClient.Name << endl;
+	cout << "Phone          : " << stClient.Phone << endl;
+	cout << "Account Balance: " << stClient.AccountBalance << endl;
+}
+
+bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector<stClientData> &vClients)
+{
+	for (stClientData& C : vClients)
+	{
+		if (C.AccountNumber == AccountNumber)
+		{
+			C.MarkForDelete = true;
+			return true;
+		}
+	}
+	return false;
+}
+
+vector<stClientData> SaveClientsDataToFile(string FileName, vector<stClientData> vClients)
+{
+	fstream MyFile;
+
+	MyFile.open(FileName, ios::out);  //OverWrite
+
+	string DataLine;
+
+	if (MyFile.is_open())
+	{
+
+		for (stClientData& C : vClients)
+		{
+			if (C.MarkForDelete == false)
+			{
+				DataLine = ConvertRecordToLine(C);
+				MyFile << DataLine << endl;
+			}
+		}
+
+		MyFile.close();
+	}
+
+	return vClients;
+}
+
+bool DeleteClientByAccountNumber(string AccountNumber, vector<stClientData> &vClients)
+{
+
+	stClientData ClientData;
+	char Answer = 'n';
+
+	if (FindClientByAccountNumber(AccountNumber, vClients, ClientData))
+	{
+		PrintClientCard(ClientData);
+
+		Answer = MyInputLib::ReadCharacter("Are You sure you want delete this client? y/n?");
+
+		if (Answer == 'Y' || Answer == 'y')
+		{
+			MarkClientForDeleteByAccountNumber(AccountNumber, vClients);
+			SaveClientsDataToFile(ClientsFileName, vClients);
+
+			//Refresh Clients 
+			vClients = LoadClientsDataFromFile(ClientsFileName);
+
+			cout << "\n\nClient Deleted Successfully.";
+
+			return true;
+		}
+
+	}
+	else
+	{
+		cout << "Client with Account Number (" << AccountNumber << ") Not Found !\n";
+		return false;
+	}
+}
+
+
+الاستدعاء : 
+
+
+	vector<stClientData> vClients = LoadClientsDataFromFile(ClientsFileName);
+	string AccountNumber = MyInputLib::ReadString("Please enter Account Number? ");
+
+	
+	DeleteClientByAccountNumber(AccountNumber, vClients);
+
+***********************************************************************************************************
+
+
+
+# Problem 51 : 
+
+const string ClientsFileName = "Clients.txt";
+
+struct stClientData
+{
+	string AccountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AccountBalance;
+	bool MarkForDelete = false;
+};
+
+stClientData ConvertLineToRecord(string Line, string Seperator = "#//#")
+{
+	stClientData stClient;
+	vector<string> vString;
+
+	vString = MyStringLib::SplitString(Line, Seperator);
+
+	stClient.AccountNumber = vString[0];
+	stClient.PinCode = vString[1];
+	stClient.Name = vString[2];
+	stClient.Phone = vString[3];
+	stClient.AccountBalance = stod(vString[4]);
+	
+	return stClient;
+}
+
+string ConvertRecordToLine(stClientData ClientData, string Seperator = "#//#")
+{
+	string stClientRecord = "";
+
+	stClientRecord += ClientData.AccountNumber + Seperator;
+	stClientRecord += ClientData.PinCode + Seperator;
+	stClientRecord += ClientData.Name + Seperator;
+	stClientRecord += ClientData.Phone + Seperator;
+	stClientRecord += to_string(ClientData.AccountBalance);
+
+	return stClientRecord;
+
+}
+
+vector<stClientData> LoadClientsDataFromFile(string FileName)
+{
+	vector<stClientData> vClients;
+
+	fstream MyFile;
+
+	MyFile.open(FileName, ios::in);
+
+	if (MyFile.is_open())
+	{
+		string Line;
+		stClientData Client;
+
+		while (getline(MyFile,Line))
+		{
+			Client = ConvertLineToRecord(Line);
+
+			vClients.push_back(Client);
+
+		}
+
+		MyFile.close();
+	}
+
+	return vClients;
+
+}
+
+bool FindClientByAccountNumber(string AccountNumber, vector<stClientData> vClients, stClientData & Client)
+{
+
+	for (stClientData & C : vClients)
+	{
+		if (C.AccountNumber == AccountNumber)
+		{
+			Client = C;
+
+			return true;
+		}
+
+	}
+
+	return false;
+}
+
+void PrintClientCard(stClientData stClient)
+{
+	//cout << "\n\nThe follwing is the extractd client record :\n\n";
+
+	cout << "Account Number : " << stClient.AccountNumber << endl;
+	cout << "PinCode        : " << stClient.PinCode << endl;
+	cout << "Name           : " << stClient.Name << endl;
+	cout << "Phone          : " << stClient.Phone << endl;
+	cout << "Account Balance: " << stClient.AccountBalance << endl;
+}
+
+
+vector<stClientData> SaveClientsDataToFile(string FileName, vector<stClientData> vClients)
+{
+	fstream MyFile;
+
+	MyFile.open(FileName, ios::out);  //OverWrite
+
+	string DataLine;
+
+	if (MyFile.is_open())
+	{
+
+		for (stClientData& C : vClients)
+		{
+			if (C.MarkForDelete == false)
+			{
+				DataLine = ConvertRecordToLine(C);
+				MyFile << DataLine << endl;
+			}
+		}
+
+		MyFile.close();
+	}
+
+	return vClients;
+}
+
+
+stClientData ReadNewClint(string AccountNumber)
+{
+	stClientData ClientData;
+
+	ClientData.AccountNumber = AccountNumber;
+
+	// Usage of std::ws will extract allthe whitespace character .
+	cout << "Enter  PinCode? ";
+	getline(cin >> ws , ClientData.PinCode);
+
+	cout << "Enter  Name? ";
+	getline(cin, ClientData.Name);
+
+	cout << "Enter  Phone? ";
+	getline(cin, ClientData.Phone);
+
+	cout << "Enter  Account Balance? ";
+	cin >> ClientData.AccountBalance;
+
+
+	return ClientData;
+}
+
+
+stClientData ChangeClientRecord(string AccountNumber)
+{
+	stClientData Client;
+
+	Client.AccountNumber = AccountNumber;
+
+	// Usage of std::ws will extract allthe whitespace character .
+	cout << "Enter  PinCode? ";
+	getline(cin >> ws, Client.PinCode);
+
+	cout << "Enter  Name? ";
+	getline(cin, Client.Name);
+
+	cout << "Enter  Phone? ";
+	getline(cin, Client.Phone);
+
+	cout << "Enter  Account Balance? ";
+	cin >> Client.AccountBalance;
+
+	return Client;
+}
+
+bool UpdateClientByAccountNumber(string AccountNumber, vector<stClientData> &vClients)
+{
+
+	stClientData ClientData;
+	char Answer = 'n';
+
+	if (FindClientByAccountNumber(AccountNumber, vClients, ClientData))
+	{
+		PrintClientCard(ClientData);
+
+		Answer = MyInputLib::ReadCharacter("Are You sure you want update this client? y/n?");
+
+		if (Answer == 'Y' || Answer == 'y')
+		{
+			
+			for (stClientData& C : vClients)
+			{
+				if (C.AccountNumber == AccountNumber)
+				{
+					C = ChangeClientRecord(AccountNumber);
+					break;
+				}
+			}
+
+
+			SaveClientsDataToFile(ClientsFileName, vClients);
+
+			cout << "\n\nClient Updated Successfully.";
+
+			return true;
+		}
+
+	}
+	else
+	{
+		cout << "Client with Account Number (" << AccountNumber << ") Not Found !\n";
+		return false;
+	}
+}
+
+
+
+
+الاستدعاء : 
+
+
+	vector<stClientData> vClients = LoadClientsDataFromFile(ClientsFileName);
+	string AccountNumber = MyInputLib::ReadString("Please enter Account Number? ");
+
+	
+	UpdateClientByAccountNumber(AccountNumber, vClients);
+
+***********************************************************************************************************

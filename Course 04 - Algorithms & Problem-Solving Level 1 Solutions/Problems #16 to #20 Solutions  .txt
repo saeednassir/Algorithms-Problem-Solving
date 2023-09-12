@@ -1,0 +1,159 @@
+// Prolem 16 :
+
+void ReadNumbers(float& Height, float& Diameter)
+{
+    cout << "Please enter height ? \n";
+    cin >> Height;
+
+    cout << "Please enter Diameter)? \n";
+    cin >> Diameter)
+
+}
+
+float CalculateRectangleAreaBySideAndDiagonal(float Height, float Diameter)
+{
+    float Area;
+    Area = Height * sqrt(pow(Diameter, 2) - pow(Height, 2));
+    return Area;
+}
+
+void PrintResult(float Area)
+{
+    cout << "\nRectangle Area is " << Area << endl;
+}
+
+الاستدعاء : 
+
+
+    float Height, Diameter;
+
+    ReadNumbers(Height, Diameter);
+    PrintResult(CalculateRectangleAreaBySideAndDiagonal(Height, Diameter));
+
+*********************************************************************************
+
+Problem 17 : 
+
+void ReadNumbers(float& Height, float& Base)
+{
+    cout << "Please enter height ? \n";
+    cin >> Height;
+
+    cout << "Please enter Base ? \n";
+    cin >> Base;
+
+}
+
+float TriangleArea(float Height, float Base)
+{
+    float Area;
+    Area = 0.5 * Height * Base;
+    return Area;
+}
+
+void PrintResult(float Area)
+{
+    cout << "\nTriangle Area is " << Area << endl;
+}
+
+الاستدعاء : 
+
+    float Height, Base;
+
+    ReadNumbers(Height, Base);
+    PrintResult(TriangleArea(Height, Base));
+
+**********************************************************************
+
+Problem 18 :
+
+float ReadRadius()
+{
+    float Radius;
+    cout << "Please enter Radius ? \n";
+    cin >> Radius;
+
+    return Radius;
+}
+
+float CircleArea(float Radius)
+{
+    float Area;
+    const float PI = 3.141592653589793238;
+    Area = PI * pow(Radius, 2);
+    return Area;
+}
+
+void PrintResult(float Area)
+{
+    cout << "\nCircle Area is " << Area << endl;
+}
+
+الاستدعاء :
+
+ 
+    PrintResult(CircleArea(ReadRadius()));
+
+***************************************************************************
+
+//Problem 19 : 
+
+float ReadDiameter()
+{
+    float Diameter;
+    cout << "Please enter Diameter ? \n";
+    cin >> Diameter;
+
+    return Diameter;
+}
+
+float CircleAreaByDiameter(float Diameter)
+{
+    float Area;
+    const float PI = 3.14;
+    Area = (PI * pow(Diameter, 2)) / 4;
+    return Area;
+}
+
+void PrintResult(float Area)
+{
+    cout << "\nCircle Area By Diameter is " << Area << endl;
+}
+
+
+الاستدعاء :
+
+ PrintResult(CircleAreaByDiameter(ReadDiameter()));
+
+********************************************************************************
+
+//Problem 20 : 
+
+float ReadSquareSide()
+{
+    float A;
+    cout << "Please enter Square Side ? \n";
+    cin >> A;
+
+    return A;
+}
+
+float CircleAreaInscribedInSquare(float A)
+{
+    float Area;
+    const float PI = 3.14;
+    Area = (PI * pow(A, 2)) / 4;
+    return Area;
+}
+
+void PrintResult(float Area)
+{
+    cout << "\nCircle Area is " << Area << endl;
+}
+
+
+الاستدعاء :
+
+PrintResult(CircleAreaInscribedInSquare(ReadSquareSide()));
+
+****************************************************************************

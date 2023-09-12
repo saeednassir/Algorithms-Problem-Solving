@@ -1,0 +1,216 @@
+// Problem #11 :
+
+enum enResult { Pass = 1, Fail = 2};
+
+
+
+void ReadMark(float& mark1, float& mark2, float& mark3)
+{
+
+	cout << "Please enter Mark 1 ?\n";
+	cin >> mark1;
+
+	cout << "Please enter Mark 2 ?\n";
+	cin >> mark2;
+
+	cout << "Please enter Mark 3 ?\n";
+	cin >> mark3;
+
+}
+
+
+enResult CheckAverage(float Average)
+{
+
+	if (Average >= 50 && Average <= 100)
+		return enResult::Pass;
+	else if(Average < 50 && Average >= 0)
+		return enResult::Fail;
+	
+
+}
+
+float CalculateAverage(float mark1, float mark2, float mark3)
+{
+	return (mark1 + mark2 + mark3) / 3;
+}
+
+void PrintAverage(float Average)
+{
+	cout << "\nThe Average  is : " << Average << "%" << endl;
+
+	if (CheckAverage(Average) == enResult::Pass)
+		cout << "\n Your Passed" << endl;
+	else if (CheckAverage(Average) == enResult::Fail)
+		cout << "\n Your Failed" << endl;
+	else
+		cout << "\n Worng Mark" << endl;
+
+}
+
+
+الاستدعاء :
+
+
+	float mark1, mark2, mark3;
+	ReadMark(mark1, mark2, mark3);
+	PrintAverage(CalculateAverage(mark1, mark2, mark3));
+
+**********************************************************************************
+
+// Problem 12 : 
+
+void ReadNumbers(int& Num1, int& Num2)
+{
+
+
+    cout << "Please enter Numbers 1 ? \n";
+    cin >> Num1;
+
+    cout << "Please enter Numbers 2 ? \n";
+    cin >> Num2;
+
+
+}
+
+
+int MaxOf2Numbers(int Num1,int Num2) 
+{
+    if (Num1 > Num2)
+        return Num1;
+    else
+        return Num2;
+}
+
+
+void PrintResult(int Max)
+{
+    cout << "\nThe Maximum Numbers is " << Max << endl;
+}
+
+الاستدعاء :
+
+int Num1, Num2;
+    ReadNumbers(Num1,Num2);
+    PrintResult(MaxOf2Numbers(Num1,Num2));
+
+
+***************************************************************************
+
+Problem 13 : 
+
+
+void ReadNumbers(int& Num1, int& Num2, int& Num3)
+{
+
+
+    cout << "Please enter Numbers 1 ? \n";
+    cin >> Num1;
+
+    cout << "Please enter Numbers 2 ? \n";
+    cin >> Num2;
+
+    cout << "Please enter Numbers 3 ? \n";
+    cin >> Num3;
+
+}
+
+
+int MaxOf3Numbers(int Num1, int Num2 , int Num3)
+{
+    if ((Num1 > Num2) && (Num1 > Num3))
+        return Num1;
+    else if ((Num2 > Num1) && (Num2 > Num3))
+        return Num2;
+    else
+        return Num3;
+}
+
+
+void PrintResult(int Max)
+{
+    cout << "\nThe Maximum Numbers is " << Max << endl;
+}
+
+الاستدعاء : 
+
+int Num1, Num2,Num3;
+    ReadNumbers(Num1, Num2,Num3);
+    PrintResult(MaxOf3Numbers(Num1, Num2,Num3));
+
+*****************************************************************************
+
+// Problem 14 :
+
+void ReadNumbers(int& Num1,int& Num2)
+{
+    cout << "Please enter Numbers 1 ? \n";
+    cin >> Num1;
+
+    cout << "Please enter Numbers 2 ? \n";
+    cin >> Num2;
+}
+
+void Swap(int& A, int& B)
+{
+    cout << "\nSwap" << endl;
+
+    int Temp;
+
+    Temp = A;
+    A = B;
+    B = Temp;
+
+}
+
+
+void PrintNumbers(int Num1, int Num2)
+{
+    cout << "\nNumber 1 = " << Num1 << endl;
+    cout << "Number 2 = " << Num2 << endl;
+}
+
+الاستدعاء : 
+
+    int Num1,Num2;
+
+    ReadNumbers(Num1, Num2);
+    PrintNumbers(Num1, Num2);
+    Swap(Num1, Num2);
+    PrintNumbers(Num1, Num2);
+
+***********************************************************************
+
+// Problem 15 :
+
+
+void ReadNumbers(float& Height, float& Width)
+{
+    cout << "Please enter height ? \n";
+    cin >> Height;
+
+    cout << "Please enter Width ? \n";
+    cin >> Width;
+
+}
+
+float CalculateRectangleArea(float Height, float Width)
+{
+    float Area;
+    Area = Height * Width;
+    return Area;
+}
+
+void PrintResult(float Area)
+{
+    cout << "\nRectangle Area is " << Area << endl;
+}
+
+الاستدعاء : 
+
+    float Height, Width;
+
+    ReadNumbers(Height,Width);
+    PrintResult(CalculateRectangleArea(Height, Width));
+
+**************************************************************************

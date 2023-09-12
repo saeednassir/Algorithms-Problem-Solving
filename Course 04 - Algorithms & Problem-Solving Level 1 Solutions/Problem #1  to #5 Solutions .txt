@@ -1,0 +1,173 @@
+// Problem 1 : 
+
+void PrintName(string Name)
+{
+	cout << "\n Your Name is : " << Name << endl;
+}
+
+الاستدعاء :
+
+PrintName("saeed");
+
+*************************************************************
+
+// Problem 2 :
+
+string ReadName()
+{
+	string Name;
+
+	cout << "Please enter your Name ? \n";
+	getline(cin,Name);
+
+	return Name;
+}
+
+void PrintName(string Name)
+{
+	cout << "\n Your Name is : " << Name << endl;
+}
+
+الاستدعاء :
+PrintName(ReadName());
+
+
+********************************************************************
+
+// Problem 3 :
+
+
+enum enNumberType{ Odd = 1 , Even = 2 };
+
+int ReadNumber() 
+{
+	int Number;
+	
+	cout << "Please enter a Number ?" << endl;
+	cin >> Number;
+
+	return Number;
+}
+
+
+enNumberType CheckNumberType(int Number)
+{
+	int Resault = Number % 2;
+
+	if (Resault == 0)
+		return  enNumberType::Even;
+	else
+		return enNumberType::Odd;
+
+}
+
+void PrintNumberType(enNumberType NumberType)
+{
+	if (NumberType == enNumberType::Even)
+		cout << "\nNumber is Even" << endl;
+	else
+		cout << "\nNumber is Odd" << endl;
+}
+
+الاستدعاء :
+
+PrintNumberType(CheckNumberType(ReadNumber()));
+
+
+*****************************************************************
+
+// Problem 4 :
+
+struct stInfo
+{
+	short Age;
+	bool HasDrivingLicense;
+}; 
+
+stInfo ReadInfo()
+{
+	stInfo Info;
+
+	cout << "Please enter your Age ? \n";
+	cin >> Info.Age;
+
+	cout << "Do you have driver License ? \n";
+	cin >> Info.HasDrivingLicense;
+
+	return Info;
+
+}
+
+bool IsAccepted(stInfo Info)
+{
+	return (Info.Age > 21 && Info.HasDrivingLicense);
+}
+
+void PrintResult(stInfo Info)
+{
+	if (IsAccepted(Info))
+		cout << "\n Hired" << endl;
+	else
+		cout << "\n Rejected" << endl;
+}
+
+الاستدعاء :
+
+PrintResult(ReadInfo());
+
+************************************************************************
+
+// Problem 5 :
+
+struct stInfo
+{
+	short Age;
+	bool HasDrivingLicense;
+	bool HasRecommendation;
+}; 
+
+stInfo ReadInfo()
+{
+	stInfo Info;
+
+	cout << "Please enter your Age ? \n";
+	cin >> Info.Age;
+
+	cout << "Do you have driver License ? \n";
+	cin >> Info.HasDrivingLicense;
+
+	cout << "Do you have Recommendation ? \n";
+	cin >> Info.HasRecommendation;
+
+	return Info;
+
+}
+
+bool IsAccepted(stInfo Info)
+{
+	if (Info.HasRecommendation)
+	{
+		return true;
+	}
+	else
+	{
+		return (Info.Age > 21 && Info.HasDrivingLicense);
+	}
+	
+}
+
+void PrintResult(stInfo Info)
+{
+	if (IsAccepted(Info))
+		cout << "\n Hired" << endl;
+	else
+		cout << "\n Rejected" << endl;
+}
+
+الاستدعاء :
+
+
+PrintResult(ReadInfo());
+
+
+***************************************************************************

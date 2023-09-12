@@ -1,0 +1,484 @@
+// Problems #11 :
+
+
+int ReadPositiveNumber(string Message)
+{
+	int Number = 0;
+	do {
+		cout << Message << endl;
+		cin >> Number;
+	} while (Number <= 0);
+	return Number;
+}
+int ReverseNumber(int Number)
+{
+	int  Remainder = 0, Number2 = 0;
+	while (Number > 0)
+	{
+		Remainder = Number % 10; 
+		Number = Number / 10; 
+		Number2 = Number2 * 10 + Remainder;
+	}
+	return Number2;
+}
+
+bool IsPalindromeNumber(int Number)
+{
+	return Number == ReverseNumber(Number);
+
+}
+
+
+الاستدعاء : 
+
+
+if(IsPalindromeNumber(ReadPositiveNumber("Please enter a positive number?")))
+		cout << "\nYes , it is a Palindrome number.\n";
+	else
+		cout << "\nNo , it is Not a Palindrome number.\n";
+
+
+**********************************************************************************
+
+
+
+// Problems #12 :
+
+
+int ReadPositiveNumber(string Message)
+{
+	int Number = 0;
+	do {
+		cout << Message << endl;
+		cin >> Number;
+	} while (Number <= 0);
+	return Number;
+}
+
+
+void PrintInvertedNumberPattern(int Number)
+{
+	cout << endl;
+
+	for (int i = Number; i >= 1; i--)
+	{
+		for (int j = 1; j <= i; j++)
+		{
+			cout << i;
+		}
+		cout << endl;
+	}
+}
+
+
+
+الاستدعاء : 
+
+
+PrintInvertedNumberPattern(ReadPositiveNumber("Please enter a positive number ?"));
+
+
+**********************************************************************************
+
+
+
+// Problems #13 :
+
+
+int ReadPositiveNumber(string Message)
+{
+	int Number = 0;
+	do {
+		cout << Message << endl;
+		cin >> Number;
+	} while (Number <= 0);
+	return Number;
+}
+
+
+void PrintNumberPattern(int Number)
+{
+	cout << endl;
+
+	for (int i = 1; i <= Number; i++)
+	{
+		for (int j = 1; j <= i; j++)
+		{
+			cout << i;
+		}
+		cout << endl;
+	}
+}
+
+
+الاستدعاء : 
+
+
+PrintNumberPattern(ReadPositiveNumber("Please enter a positive number ?"));
+
+
+**********************************************************************************
+
+
+
+// Problems #14 :
+
+
+int ReadPositiveNumber(string Message)
+{
+	int Number = 0;
+	do {
+		cout << Message << endl;
+		cin >> Number;
+	} while (Number <= 0);
+	return Number;
+}
+
+
+void PrintInvertedLetterPattern(int Number)
+{
+	cout << endl;
+	int CharNumber = Number + 64;
+
+	for (int i = CharNumber; i >= 65; i--)
+	{
+		for (int j = 65; j <= i; j++)
+		{
+			cout << char(i);
+		}
+		
+		cout << endl;
+	}
+}
+
+
+
+الاستدعاء : 
+
+
+PrintInvertedLetterPattern(ReadPositiveNumber("Please enter a positive number ?"));
+
+
+
+**********************************************************************************
+
+
+
+// Problems #15 :
+
+
+int ReadPositiveNumber(string Message)
+{
+	int Number = 0;
+	do {
+		cout << Message << endl;
+		cin >> Number;
+	} while (Number <= 0);
+	return Number;
+}
+
+
+void PrintLetterPattern(int Number)
+{
+	cout << endl;
+	int CharNumber = Number + 64;
+
+	for (int i = 65; i <= CharNumber; i++)
+	{
+		for (int j = 65; j <= i; j++)
+		{
+			cout << char(i);
+		}
+		
+		cout << endl;
+	}
+}
+
+			***********************************
+	 : حل أخر للبروسيجر الدي اعلاه  :
+
+	void PrintLetterPattern(int Number)
+	{
+		cout << endl;
+		string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+		for (int i = 0; i < Number; i++)
+		{
+			for (int j = 0; j <= i; j++)
+			{
+				cout << Chars[i];
+			}
+		
+			cout << endl;
+		}
+	}
+
+			***************************************
+الاستدعاء : 
+
+
+PrintLetterPattern(ReadPositiveNumber("Please enter a positive number ?"));
+
+
+**********************************************************************************
+
+
+
+// Problems #16 :
+
+
+void PrintWordsFromAAAtoZZZ()
+{
+	cout << "\n";
+	string word = "";
+	for (int i = 65; i <= 90; i++)
+	{
+		for (int j = 65; j <= 90; j++)
+		{
+			for (int k = 65; k <= 90; k++)
+			{
+				word = word + char(i);
+				word = word + char(j);
+				word = word + char(k);
+				cout << word << endl;
+				word = "";
+			}
+		}
+		cout << "\n____________________________\n";
+	}
+	
+}
+
+
+
+
+الاستدعاء : 
+
+
+PrintWordsFromAAAtoZZZ();
+
+
+**********************************************************************************
+
+
+
+// Problems #17 :
+
+
+string ReadPassword()
+{
+	string Password;
+	cout << "Please enter a 3-Letter Password (all capital)?\n";
+	cin >> Password;
+
+	return Password;
+}
+
+
+string Longitude(int Counter)
+{
+	if (Counter < 10)
+		return "    : ";
+	else if (Counter < 100)
+		return "   : ";
+	else if (Counter < 1000)
+		return "  : ";
+	else if (Counter < 10000)
+		return " : ";
+	else
+		return ": ";
+}
+
+
+bool GuessPassword(string OriginalPassword)
+{
+	cout << "\n";
+	string word = "";
+	int Counter = 0;
+
+
+	for (int i = 65; i <= 90; i++)
+	{
+		for (int j = 65; j <= 90; j++)
+		{
+			for (int k = 65; k <= 90; k++)
+			{
+				word = word + char(i);
+				word = word + char(j);
+				word = word + char(k);
+				Counter++;
+				cout <<" Trial ["<< Counter << "] " << Longitude(Counter) << word << endl;
+				
+				if (OriginalPassword == word)
+				{
+					cout << endl << "Password is " << word << endl;
+					cout << "Found after " << Counter << " Trial(s)." << endl;
+
+					return true;
+				}
+					
+				
+				word = "";
+
+			}
+		}
+		cout << "\n____________________________\n";
+		
+	}
+	
+	return false;
+}
+
+
+
+
+الاستدعاء : 
+
+
+GuessPassword(ReadPassword());
+
+
+**********************************************************************************
+
+
+
+// Problems #18 :
+
+
+string ReadText()
+{
+	string Text;
+	cout << "Please enter Text?\n";
+	getline(cin, Text);
+	return Text;
+}
+
+string  EncryptText(string Text, short EncryptionKey)
+{
+	for (int i = 0; i <= Text.length(); i++)
+	{
+		Text[i] = char((int)Text[i] + EncryptionKey);
+	}
+
+	return Text;
+
+}
+
+
+string  DecryptText(string Text, short EncryptionKey)
+{
+	for (int i = 0; i <= Text.length(); i++)
+	{
+		Text[i] = char((int)Text[i] - EncryptionKey);
+	}
+
+	return Text;
+}
+
+
+
+الاستدعاء : 
+
+
+const short EncryptionKey = 2; // this is the key .
+
+	string TextAfterEncryption , TextAfterDecryption;
+
+	string Text = ReadText();
+	TextAfterEncryption = EncryptText(Text, EncryptionKey);
+	TextAfterDecryption = DecryptText(TextAfterEncryption, EncryptionKey);
+
+	cout << "\nText Before Encryption : ";
+	cout << Text << endl;
+	cout << "Text After Encryption  : ";
+	cout << TextAfterEncryption << endl;
+	cout << "Text After Decryption  : ";
+	cout << TextAfterDecryption << endl;
+
+
+**********************************************************************************
+
+
+
+// Problems #19 :
+
+#include<cstdlib> //Random مكتبة
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+
+}
+
+الاستدعاء : 
+
+
+//Seeds the random number generator in C++, called only once  : تكتب في ال main  
+	srand((unsigned)time(NULL));
+	
+	cout << RandomNumber(11, 13) << endl;
+	cout << RandomNumber(11, 13) << endl;
+	cout << RandomNumber(11, 13) << endl;
+
+
+
+**********************************************************************************
+
+
+
+
+// Problems #20 :
+
+#include<cstdlib> //Random
+
+
+enum enCharType{ SamallLetter = 1, CapitalLetter = 2, SpecialCharacter = 3, Digit = 4 };
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+
+}
+
+char GetRandomCharacter(enCharType CharType)
+{
+
+	switch (CharType)
+	{
+	case SamallLetter:
+		return char(RandomNumber(97, 122));
+		break;
+	case CapitalLetter:
+		return char(RandomNumber(65, 90));
+		break;
+	case SpecialCharacter:
+		return char(RandomNumber(43, 47));
+		break;
+	case Digit:
+		return char(RandomNumber(48, 57));
+		break;
+	
+	}
+
+}
+
+
+الاستدعاء : 
+
+//Seeds the random number generator in C++, called only once    
+	srand((unsigned)time(NULL));
+	
+	cout << GetRandomCharacter(enCharType::SamallLetter) << endl;
+	cout << GetRandomCharacter(enCharType::CapitalLetter) << endl;
+	cout << GetRandomCharacter(enCharType::SpecialCharacter) << endl;
+	cout << GetRandomCharacter(enCharType::Digit) << endl;
+
+
+
+**********************************************************************************

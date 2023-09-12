@@ -1,0 +1,220 @@
+// Problem 31 : 
+
+int ReadNumber()
+{
+    int Number;
+    cout << "Please enter Number ? \n";
+    cin >> Number;
+
+    return Number;
+
+}
+
+void PowerOf2_3_4(int Number)
+{
+    int PowerOf2 = Number * Number;
+    int PowerOf3 = Number * Number * Number;
+    int PowerOf4 = Number * Number * Number * Number;
+
+    cout << "Power Of 2 is = " << PowerOf2 << endl;
+    cout << "Power Of 3 is = " << PowerOf3 << endl;
+    cout << "Power Of 4 is = " << PowerOf4 << endl;
+}
+
+
+
+الاستدعاء :
+
+ PowerOf2_3_4(ReadNumber());
+
+
+************************************************************************
+
+
+// Problem 32 : 
+
+void ReadNumber(int& Number,int& M)
+{
+
+    cout << "Please enter Number ? \n";
+    cin >> Number;
+
+    cout << "Please enter M ? \n";
+    cin >> M;
+
+}
+
+
+int PowerOfM(int Number, int M)
+{
+    if (M == 0)
+    {
+        return 1;
+    }
+
+    int P = 1;
+
+    for (int i = 1; i <= M; i++)
+    {
+        P *= Number;
+    }
+
+    return P;
+}
+
+
+
+الاستدعاء :
+
+
+    int Number, M;
+    ReadNumber(Number, M);
+    cout << "Result = " << PowerOfM(Number, M);
+
+
+
+************************************************************************
+
+
+// Problem 33 : 
+
+int ReadGradeRange(int From,int To)
+{
+    int Grade;
+    do 
+    {
+        cout << "Please enter Gread ? \n";
+        cin >> Grade;
+
+    } while (Grade < From || Grade > To );
+
+   
+    return Grade;
+    
+}
+
+char PrintGrade(int Grade)
+{
+
+    if (Grade >= 90)
+        return 'A';
+    else if (Grade >= 80)
+        return 'B';
+    else if (Grade >= 70)
+        return 'C';
+    else if (Grade >= 60)
+        return 'D';
+    else if (Grade >= 50)
+        return 'E';
+    else
+        return 'F';
+
+
+}
+
+
+الاستدعاء :
+
+cout << "Result = " << PrintGrade(ReadGradeRange(0, 100));
+
+
+************************************************************************
+
+
+
+// Problem 34 : 
+
+
+float ReadTotalSales()
+{
+    float TotalSales;
+
+    cout << "Pleease enter a Total Sales ?" << endl;
+    cin >> TotalSales;
+
+    return TotalSales;
+
+}
+
+float GetComissionPercentage(float TotalSales)
+{
+    if (TotalSales >= 1000000)
+        return 0.01;
+    else if (TotalSales >= 500000)
+        return 0.02;
+    else if (TotalSales >= 100000)
+        return 0.03;
+    else if (TotalSales >= 50000)
+        return 0.05;
+    else
+        return 0.00;
+}
+
+float CalculateTotalComission(float TotalSales)
+{
+
+    return TotalSales * GetComissionPercentage(TotalSales);
+
+}
+
+
+الاستدعاء :
+
+
+cout << "Result = " << CalculateTotalComission(ReadTotalSales());
+
+
+************************************************************************
+
+
+// Problem 35 : 
+
+
+struct stPiggyBankContenet
+{
+    int Pennies, Nickels, Dimes, Quarters, Dollars;
+};
+
+stPiggyBankContenet ReadPiggyBankContenet()
+{
+    stPiggyBankContenet PiggyBankContenet;
+
+    cout << "Please enter Pennies ?" << endl;
+    cin >> PiggyBankContenet.Pennies;
+
+    cout << "Please enter Nickels ?" << endl;
+    cin >> PiggyBankContenet.Nickels;
+
+    cout << "Please enter Dimes ?" << endl;
+    cin >> PiggyBankContenet.Dimes;
+
+    cout << "Please enter Quarters ?" << endl;
+    cin >> PiggyBankContenet.Quarters;
+
+    cout << "Please enter Dollars ?" << endl;
+    cin >> PiggyBankContenet.Dollars;
+
+    return PiggyBankContenet;
+}
+
+int CalculateTotalPennies(stPiggyBankContenet PiggyBankContenet)
+{
+    int TotalPennies = 0;
+
+    TotalPennies = PiggyBankContenet.Pennies * 1 + PiggyBankContenet.Nickels * 5 +
+        PiggyBankContenet.Dimes * 10 + PiggyBankContenet.Quarters * 25 +
+        PiggyBankContenet.Dollars * 100;
+
+    return TotalPennies;
+}
+
+
+الاستدعاء :
+
+    int TotalPennies = CalculateTotalPennies(ReadPiggyBankContenet());
+    cout << endl << "Total Pennies = " << TotalPennies << endl;
+    cout << endl << "Total Dollars = " << float(TotalPennies) / 100 << endl;
+    
+
+
+************************************************************************

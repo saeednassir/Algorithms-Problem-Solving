@@ -1,0 +1,790 @@
+// Problems #21 :
+
+
+#include<cstdlib> //Random 
+
+enum enCharType{ SamallLetter = 1, CapitalLetter = 2, 
+	SpecialCharacter = 3, Digit = 4 };
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+
+}
+
+char GetRandomCharacter(enCharType CharType)
+{
+
+	switch (CharType)
+	{
+	case SamallLetter:
+		return char(RandomNumber(97, 122));
+		break;
+	case CapitalLetter:
+		return char(RandomNumber(65, 90));
+		break;
+	case SpecialCharacter:
+		return char(RandomNumber(43, 47));
+		break;
+	case Digit:
+		return char(RandomNumber(48, 57));
+		break;
+	
+	}
+
+}
+
+int ReadPositiveNumber(string Message)
+{
+	int Number = 0;
+	do {
+		cout << Message << endl;
+		cin >> Number;
+	} while (Number <= 0);
+	return Number;
+}
+
+string GenerateWord(enCharType CharType, short Length)
+{
+	string Word;
+
+	for (int i = 0; i <= Length; i++)
+	{
+		Word = Word + GetRandomCharacter(CharType);
+	}
+
+	return Word;
+
+}
+
+
+string  GenerateKey() 
+{
+	string Key = "";
+
+	Key = GenerateWord(enCharType::CapitalLetter, 4) + "-";
+	Key = Key + GenerateWord(enCharType::CapitalLetter, 4) + "-";
+	Key = Key + GenerateWord(enCharType::CapitalLetter, 4) + "-";
+	Key = Key + GenerateWord(enCharType::CapitalLetter, 4);
+
+	return Key;
+}
+
+void GenerateKeys(short NumberOfKeys)
+{
+	for (int i = 1; i <= NumberOfKeys; i++)
+	{ 
+		cout << "Key [" << i << "] : ";
+		cout << GenerateKey() << endl;
+	}
+}
+
+
+
+الاستدعاء : 
+
+
+//Seeds the random number generator in C++, called only once    
+	srand((unsigned)time(NULL));
+	
+	GenerateKeys(ReadPositiveNumber("Pleaes enter how many keys to generate? \n "));
+
+
+**************************************************************************************
+
+
+
+// Problems #22 :
+
+
+int ReadPositiveNumber(string Message)
+{
+	int Number = 0;
+	do {
+		cout << Message << endl;
+		cin >> Number;
+	} while (Number <= 0);
+	return Number;
+}
+
+void ReadArray(int arr[100], int& arrLength)
+{
+
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	cout << "Enter array elements :\n";
+	
+	for (int i = 1; i <= arrLength; i++)
+	{
+		cout << "Element [" << i << "] : ";
+		cin >> arr[i-1];
+	}
+	cout << endl;
+
+}
+
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+
+		cout << "\n";
+	
+}
+
+int TimesRepeated(int Number, int arr[100], int arrLength)
+{ 
+	int count = 0;
+	for (int i = 0; i <= arrLength - 1; i++)
+	{
+		if (Number == arr[i]) 
+		{
+			count++;
+		}
+	}
+	return count;
+}
+
+
+الاستدعاء : 
+
+
+int arr[100], arrLength, NumberToCheck;
+
+	ReadArray(arr, arrLength);
+
+	NumberToCheck = ReadPositiveNumber("Enter the number you want to check: ");
+
+	cout << "\nOriginal array: ";
+
+	PrintArray(arr, arrLength);
+
+	cout << "\nNumber " << NumberToCheck;
+
+	cout << " is repeated "; 
+	cout << TimesRepeated(NumberToCheck, arr, arrLength) << " time(s)\n";
+
+
+**************************************************************************************
+
+
+
+
+// Problems #23 :
+
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+
+}
+
+void FillArrayWithRandomNumbers(int arr[100], int& arrLength)
+{
+
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+
+}
+
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+
+	cout << "\n";
+
+}
+
+
+الاستدعاء : 
+
+
+srand((unsigned)time(NULL));
+	
+
+	int arr[100],arrLength;
+
+	FillArrayWithRandomNumbers(arr, arrLength);
+
+	cout << "Array Elements : ";
+	PrintArray(arr, arrLength);
+
+
+**************************************************************************************
+
+
+
+// Problems #24 :
+
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+
+}
+
+void FillArrayWithRandomNumbers(int arr[100], int& arrLength)
+{
+
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+
+}
+
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+
+	cout << "\n";
+
+}
+
+int MaxNumberInArray(int arr[100],int arrLength)
+{
+	int MaxNumber = 0;
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		if (arr[i] > MaxNumber)
+			MaxNumber = arr[i];
+	}
+
+	return MaxNumber;
+
+}
+
+
+
+الاستدعاء : 
+
+
+srand((unsigned)time(NULL));
+	
+
+	int arr[100],arrLength;
+
+	FillArrayWithRandomNumbers(arr, arrLength);
+
+	cout << "Array Elements : ";
+	PrintArray(arr, arrLength);
+	cout << endl;
+
+	cout << "Max number is " << MaxNumberInArray(arr, arrLength) << endl;
+
+
+
+**************************************************************************************
+
+
+
+// Problems #25 :
+
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+
+}
+
+void FillArrayWithRandomNumbers(int arr[100], int& arrLength)
+{
+
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+
+}
+
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+
+	cout << "\n";
+
+}
+
+int MinNumberInArray(int arr[100],int arrLength)
+{
+	int MinNumber = 0;
+	MinNumber = arr[0];
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		if (arr[i] < MinNumber)
+			MinNumber = arr[i];
+	}
+
+	return MinNumber;
+
+}
+
+
+الاستدعاء : 
+
+
+srand((unsigned)time(NULL));
+	
+
+	int arr[100],arrLength;
+
+	FillArrayWithRandomNumbers(arr, arrLength);
+
+	cout << "Array Elements : ";
+	PrintArray(arr, arrLength);
+	cout << endl;
+
+	cout << "Min number is " << MinNumberInArray(arr, arrLength) << endl;
+
+
+**************************************************************************************
+
+
+
+
+// Problems #26 :
+
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+
+}
+
+void FillArrayWithRandomNumbers(int arr[100], int& arrLength)
+{
+
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+
+}
+
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+
+	cout << "\n";
+
+}
+
+int SumArray(int arr[100],int arrLength)
+{
+	int Sum = 0;
+	
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		Sum += arr[i];
+	}
+
+	return Sum;
+
+}
+
+
+
+الاستدعاء : 
+
+
+srand((unsigned)time(NULL));
+	
+
+	int arr[100],arrLength;
+
+	FillArrayWithRandomNumbers(arr, arrLength);
+
+	cout << "Array Elements : ";
+	PrintArray(arr, arrLength);
+	cout << endl;
+
+	cout << "Sum Of all numbers is " << SumArray(arr, arrLength) << endl;
+
+
+**************************************************************************************
+
+
+
+
+
+
+// Problems #27 :
+
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+
+}
+
+void FillArrayWithRandomNumbers(int arr[100], int& arrLength)
+{
+
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+
+}
+
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+
+	cout << "\n";
+
+}
+
+
+int SumArray(int arr[100], int arrLength)
+{
+	int Sum = 0;
+
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		Sum += arr[i];
+	}
+
+	return Sum;
+
+}
+
+float AverageArray(int arr[100],int arrLength)
+{
+	return (float)SumArray(arr, arrLength) / arrLength;
+}
+
+
+الاستدعاء : 
+
+
+srand((unsigned)time(NULL));
+	
+
+	int arr[100],arrLength;
+
+	FillArrayWithRandomNumbers(arr, arrLength);
+
+	cout << "Array Elements : ";
+	PrintArray(arr, arrLength);
+	cout << endl;
+
+	cout << "Average Of all numbers is " << AverageArray(arr, arrLength) << endl;
+
+
+**************************************************************************************
+
+
+
+
+// Problems #28 :
+
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+
+}
+
+void FillArrayWithRandomNumbers(int arr[100], int& arrLength)
+{
+
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+
+}
+
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+
+	cout << "\n";
+
+}
+
+
+void CopyArray(int arrSource[100], int arrDestination[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+	{
+		arrDestination[i] = arrSource[i];
+	}
+}
+
+
+
+الاستدعاء : 
+
+
+srand((unsigned)time(NULL));
+	
+
+	int arr[100],arrLength;
+
+	FillArrayWithRandomNumbers(arr, arrLength);
+
+	int arr2[100];
+	CopyArray(arr, arr2, arrLength);
+
+	cout << "\nArray 1 elements:\n";
+	PrintArray(arr, arrLength);
+
+	cout << "\nArray 2 elements after copy:\n";
+	PrintArray(arr2, arrLength);
+
+	cout << endl;
+
+
+**************************************************************************************
+
+
+
+
+
+// Problems #29 :
+
+enum enPrimNotPrime{ Prime = 1, NotPrime = 2 };
+
+enPrimNotPrime CheckPrime(int Number)
+{ 
+	int M = round(Number / 2);
+	for (int Counter = 2; Counter <= M; Counter++)
+	{ 
+		if (Number % Counter == 0)
+			return enPrimNotPrime::NotPrime;
+	}
+	return enPrimNotPrime::Prime;
+}
+
+
+
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+
+}
+
+void FillArrayWithRandomNumbers(int arr[100], int& arrLength)
+{
+
+	cout << "\nEnter number of elements:\n";
+	cin >> arrLength;
+
+	
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+
+}
+
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+
+	cout << "\n";
+
+}
+
+
+void CopyOnlyPrimeNumbers(int arrSource[100], int arrDestination[100], int arrLength, int& arr2Lenght)
+{
+	int Counter = 0;
+	for (int i = 0; i < arrLength; i++)
+	{
+		if (CheckPrime(arrSource[i]) == enPrimNotPrime::Prime)
+		{
+			arrDestination[Counter] = arrSource[i]; 
+			Counter++;
+		}
+	}
+	arr2Lenght = Counter;
+}
+
+
+
+الاستدعاء : 
+
+
+srand((unsigned)time(NULL));
+	
+
+	int arr[100], arrLength; 
+
+	FillArrayWithRandomNumbers(arr, arrLength);
+
+	int arr2[100], arr2Length = 0;   
+	CopyOnlyPrimeNumbers(arr, arr2, arrLength, arr2Length);
+
+	cout << "\nArray 1 elements:\n";  
+	PrintArray(arr, arrLength); 
+
+	cout << "\nPrime Numbers in Array2:\n";
+	PrintArray(arr2, arr2Length);
+
+
+
+**************************************************************************************
+
+
+
+// Problems #30 :
+
+
+int RandomNumber(int From, int To)
+{
+	//Function to generate a random number
+
+	int randNum = rand() % (To - From + 1) + From;
+	return randNum;
+
+}
+
+void FillArrayWithRandomNumbers(int arr[100], int arrLength)
+{
+
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arr[i] = RandomNumber(1, 100);
+	}
+	cout << endl;
+
+}
+
+void PrintArray(int arr[100], int arrLength)
+{
+	for (int i = 0; i < arrLength; i++)
+		cout << arr[i] << " ";
+
+	cout << "\n";
+
+}
+
+
+void SumOf2Arrays(int arr1[100], int arr2[100], int arrSum[100], int arrLength)
+{
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		arrSum[i] = arr1[i] + arr2[i];
+	}
+
+}
+
+
+int ReadArrayLength()
+{
+	int Length;
+	cout << "How many elemant ?\n";
+	cin >> Length;
+
+	return Length;
+}
+
+
+الاستدعاء : 
+
+
+srand((unsigned)time(NULL));
+	
+	
+	int arr1[100], arr2[100], arrSum[100];
+	int arrLength = ReadArrayLength();
+
+	FillArrayWithRandomNumbers(arr1, arrLength);
+	FillArrayWithRandomNumbers(arr2, arrLength);
+
+	SumOf2Arrays(arr1, arr2, arrSum, arrLength);
+
+	cout << "Array 1 elements :" << endl;
+	PrintArray(arr1, arrLength);
+
+	cout << "\nArray 2 elements :" << endl;
+	PrintArray(arr2, arrLength);
+
+	cout << "\nSum Of Array1 and Array2 elements :\n";
+	PrintArray(arrSum, arrLength);
+	
+
+
+**************************************************************************************

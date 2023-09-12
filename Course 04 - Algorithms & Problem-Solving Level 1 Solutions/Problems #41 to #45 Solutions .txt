@@ -1,0 +1,318 @@
+// Problem 41 :
+
+
+float ReadPositineNumber(string Message)
+{
+	float Num;
+do{
+	cout << Message << endl;
+	cin >> Num;
+}while(Num < 0);
+	return Num;
+}
+
+float HoursToDays(float NumberOfHours)
+{
+	return (float)NumberOfHours / 24;
+}
+
+float HoursToWeeks(float NumberOfHours)
+{
+	return (float)NumberOfHours / 24 / 7;
+}
+
+float DaysToWeeks(float NumberOfDays)
+{
+	return (float)NumberOfDays / 7;
+}
+
+
+
+الاستدعاء : 
+
+
+float NumberOfHours = ReadPositineNumber("Please Enter Number Of Hours ?");
+	float NumberOfDays = HoursToDays(NumberOfHours);
+	float NumberOfWeeks = DaysToWeeks(NumberOfDays);
+
+	cout << endl;
+	cout << "Total Hours = " << NumberOfHours << endl;
+	cout << "Total Days = " << NumberOfDays << endl;
+	cout << "Total Weeks = " << DaysToWeeks << endl;
+
+
+*************************************************************************************
+
+
+
+// Problem 42 :
+
+struct stTaskDuration
+{
+	int NumberOfDays, NumberOfHours, NumberOfMinutes, NumberOfSeconds;
+};
+
+
+
+int ReadPositineNumber(string Message)
+{
+	float Num;
+	do 
+	{
+		cout << Message << endl;
+		cin >> Num;
+
+	} while (Num < 0);
+	
+	return Num;
+}
+
+stTaskDuration ReadTaskDuration()
+{
+	stTaskDuration TaskDuration;
+
+	TaskDuration.NumberOfDays = ReadPositineNumber("Please Enter Number Of Days ?");
+	TaskDuration.NumberOfHours = ReadPositineNumber("Please Enter Number Of Hours ?");
+	TaskDuration.NumberOfMinutes = ReadPositineNumber("Please Enter Number Of Minuutes ?");
+	TaskDuration.NumberOfSeconds = ReadPositineNumber("Please Enter Number Of Seconds ?");
+
+	return TaskDuration;
+}
+
+int TaskDurationInSeconds(stTaskDuration TaskDuration)
+{
+	int DurationInSeconds = 0;
+
+	DurationInSeconds = TaskDuration.NumberOfDays * 24 * 60 * 60;
+	DurationInSeconds += TaskDuration.NumberOfHours * 60 * 60;
+	DurationInSeconds += TaskDuration.NumberOfMinutes * 60;
+	DurationInSeconds += TaskDuration.NumberOfSeconds ;
+
+	return DurationInSeconds;
+}
+
+
+الاستدعاء : 
+
+
+cout << "\nTask Duration In Seconds : " << TaskDurationInSeconds(ReadTaskDuration()) << endl;
+    
+
+
+*************************************************************************************
+
+
+
+// Problem 43 :
+
+struct strTaskDuration
+{
+	int NumberOfDays, NumberOfHours, NumberOfMinutes, NumberOfSeconds;
+
+};
+
+int ReadPositineNumber(string Message)
+{
+	float Num;
+	do
+	{
+		cout << Message << endl;
+		cin >> Num;
+
+	} while (Num < 0);
+
+	return Num;
+}
+
+strTaskDuration SecondsToTaskDuration(int TotalSeconds)
+{
+	strTaskDuration TaskDuration;
+
+	const int SecondsPerDay = 24 * 60 * 60;
+	const int SecondsPerHour = 60 * 60;
+	const int SecondsPerMinute = 60;
+
+	int Remainder = 0;
+
+	TaskDuration.NumberOfDays = floor(TotalSeconds / SecondsPerDay);
+	Remainder = TotalSeconds % SecondsPerDay;
+	TaskDuration.NumberOfHours = floor(Remainder / SecondsPerHour);
+	Remainder = Remainder % SecondsPerHour;
+	TaskDuration.NumberOfMinutes = floor(Remainder / SecondsPerMinute);
+	Remainder = Remainder % SecondsPerMinute;
+	TaskDuration.NumberOfSeconds = Remainder;
+
+	return TaskDuration;
+
+}
+
+void PrintTaskDurationDetails(strTaskDuration TaskDuration)
+{
+	cout << endl;
+	cout << TaskDuration.NumberOfDays << ":"
+		<< TaskDuration.NumberOfHours << ":"
+		<< TaskDuration.NumberOfMinutes << ":"
+		<< TaskDuration.NumberOfSeconds << "\n";
+}
+
+
+
+الاستدعاء : 
+
+
+	int TotalSeconds = ReadPositineNumber("Please Enter Total Seconds ?");
+	PrintTaskDurationDetails(SecondsToTaskDuration(TotalSeconds));
+
+
+	
+*************************************************************************************
+
+
+
+
+// Problem 44 :
+
+enum enDayOfWeek { Sat = 1, Sun = 2, Mon = 3, Tue = 4, Wed = 5, Thu = 6, Fri = 7 };
+
+int ReadNumberInRange(string Message, int From, int To)
+{
+	int Number;
+	do
+	{
+		cout << Message << endl;
+		cin >> Number;
+
+	} while (Number < From || Number > To);
+
+	return Number;
+}
+
+enDayOfWeek ReadDayOfWeek()
+{
+	return (enDayOfWeek)ReadNumberInRange("Please enter day number Sat = 1,Sun = 2,Mon = 3,Tue = 4,Wed = 5,Thu = 6,Fri = 7 ?", 1, 7);
+}
+
+string GetDayOfWeek(enDayOfWeek Day)
+{
+	switch (Day)
+	{
+	case enDayOfWeek::Sat:
+		return "Saturday";
+		break;
+	case  enDayOfWeek::Sun:
+		return "Sunday";
+		break;
+	case  enDayOfWeek::Mon:
+		return "Monday";
+		break;
+	case  enDayOfWeek::Tue:
+		return "Tuesday";
+		break;
+	case  enDayOfWeek::Wed:
+		return "Wednesday";
+		break;
+	case  enDayOfWeek::Thu:
+		return "Thursday";
+		break;
+	case  enDayOfWeek::Fri:
+		return "Friday";
+		break;
+	default:
+		return "Not a valid Day !";
+		break;
+	}
+}
+
+
+
+الاستدعاء : 
+
+
+
+cout << "Day is " << GetDayOfWeek(ReadDayOfWeek()) << endl;
+	
+
+*************************************************************************************
+
+
+
+
+// Problem 45 :
+
+enum enMonthOfYear { Jan = 1, Feb = 2, Mar = 3, Apr = 4, May = 5, Jun = 6,
+	                 Jul = 7, Aug = 8, Sep = 9, Oct = 10, Nov = 11 , Dec = 12 };
+
+int ReadNumberInRange(string Message, int From, int To)
+{
+	int Number;
+	do
+	{
+		cout << Message << endl;
+		cin >> Number;
+
+	} while (Number < From || Number > To);
+
+	return Number;
+}
+
+enMonthOfYear ReadMonthOfYear()
+{
+	return (enMonthOfYear)ReadNumberInRange("Please enter Month number ?", 1, 12);
+}
+
+string GetMonthOfYear(enMonthOfYear Month)
+{
+	switch (Month)
+	{
+	case enMonthOfYear::Jan:
+		return "January";
+		break;
+	case enMonthOfYear::Feb:
+		return "Febrary";
+		break;
+	case enMonthOfYear::Mar:
+		return "March";
+		break;
+	case enMonthOfYear::Apr:
+		return "April";
+		break;
+	case enMonthOfYear::May:
+		return "May";
+		break;
+	case enMonthOfYear::Jun:
+		return "June";
+		break;
+	case enMonthOfYear::Jul:
+		return "July";
+		break;
+	case enMonthOfYear::Aug:
+		return "August";
+		break;
+	case enMonthOfYear::Sep:
+		return "September";
+		break;
+	case enMonthOfYear::Oct:
+		return "October";
+		break;
+	case enMonthOfYear::Nov:
+		return "November";
+		break;
+	case enMonthOfYear::Dec:
+		return "December";
+		break;
+	default:
+		return "Wrong Month !";
+		break;
+	}
+}
+
+
+
+الاستدعاء : 
+
+cout << "Month is " << GetMonthOfYear(ReadMonthOfYear()) << endl;
+	
+
+
+
+*************************************************************************************

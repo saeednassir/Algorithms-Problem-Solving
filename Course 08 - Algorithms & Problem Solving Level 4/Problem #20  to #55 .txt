@@ -1,0 +1,1159 @@
+// Problem #20  to #32 : 
+
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+bool IsLeapYear(int Year)
+{
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+}
+
+int NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (int i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.Day == NumberOfDaysInMonth(Date.Year, Date.Month));
+}
+
+bool IsLastMonthInYear(short Month)
+{
+	return (Month == 12);
+}
+
+stDate IncreaseDateByOneDay(stDate Date)
+{
+	if (IsLastDayInMonth(Date))
+	{
+		if (IsLastMonthInYear(Date.Month))
+		{
+			Date.Day = 1;
+			Date.Month = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
+	}
+	else
+	{
+		Date.Day++;
+	}
+
+	return Date;
+}
+
+stDate IncreaseDateByXDay(stDate Date, int X)
+{
+	for (int i = 0; i < X; i++)
+	{
+		Date = IncreaseDateByOneDay(Date);
+	}
+
+	return Date;
+}
+
+stDate IncreaseDateByOneWeek(stDate Date)
+{
+	return IncreaseDateByXDay(Date, 7);
+}
+
+stDate IncreaseDateByXWeeks(stDate Date, int X)
+{
+	for (int i = 0; i < X; i++)
+	{
+		Date = IncreaseDateByOneWeek(Date);
+	}
+
+	return Date;
+}
+
+stDate IncreaseDateByOneMonth(stDate Date)
+{
+
+	if (Date.Month == 12)
+	{
+		Date.Month = 1;
+		Date.Year++;
+	}
+	else
+	{
+		Date.Month++;
+	}
+
+	/*last check day in date should not exceed max days in thecurrent month
+		 example if date is 31/1/2022 increasing one month should not be 31 / 2 / 2022, it should
+		 be 28/2/2022*/
+
+	short NumberOfDaysInCurrentMonth = NumberOfDaysInMonth(Date.Year, Date.Month);
+
+	if (Date.Day > NumberOfDaysInCurrentMonth)
+	{
+		Date.Day = NumberOfDaysInCurrentMonth;
+	}
+	return Date;
+}
+
+stDate IncreaseDateByXMonths(stDate Date, int X)
+{
+	for (int i = 0; i < X; i++)
+	{
+		Date = IncreaseDateByOneMonth(Date);
+	}
+	
+	return Date;
+}
+
+stDate IncreaseDateByOneYear(stDate Date)
+{
+	Date.Year++;
+	return Date;
+}
+
+stDate IncreaseDateByXYears(stDate Date, int X)
+{
+	for (int i = 0; i < X; i++)
+	{
+		Date = IncreaseDateByOneYear(Date);
+	}
+
+	return Date;
+}
+
+stDate IncreaseDateByXYearsFaster(stDate Date, int X)
+{
+		Date.Year += X;
+
+	return Date;
+}
+
+stDate IncreaseDateByOneDecade(stDate Date)
+{
+	Date.Year += 10;
+	return Date;
+}
+
+stDate IncreaseDateByXDecade(stDate Date, int X)
+{
+	for (int i = 0; i < X; i++)
+	{
+		Date = IncreaseDateByOneDecade(Date);
+	}
+
+	return Date;
+}
+
+stDate IncreaseDateByXDecadeFaster(stDate Date, int X)
+{
+	
+		Date.Year += X * 10;
+
+	return Date;
+}
+
+stDate IncreaseDateByOneCentury(stDate Date)
+{
+	Date.Year += 100;
+	return Date;
+}
+
+stDate IncreaseDateByOneMillennium(stDate Date)
+{
+	Date.Year += 1000;
+	return Date;
+}
+
+
+
+
+الاستدعاء : 
+
+
+
+	stDate Date = ReadFullDate();
+
+	cout << "\nDate After : \n\n";
+
+	Date = IncreaseDateByOneDay(Date);
+	cout << "01-Adding one day is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByXDay(Date,10);
+	cout << "02-Adding 10 day is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByOneWeek(Date);
+	cout << "03-Adding one week is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByXWeeks(Date,10);
+	cout << "04-Adding 10 weeks is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByOneMonth(Date);
+	cout << "05-Adding one month is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByXMonths(Date,5);
+	cout << "06-Adding 5 month is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByOneYear(Date);
+	cout << "07-Adding one Year is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByXYears(Date,10);
+	cout << "08-Adding 10 Years is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByXYearsFaster(Date, 10);
+	cout << "09-Adding 10 Years (faster) is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByOneDecade(Date);
+	cout << "10-Adding one Decade is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByXDecade(Date,10);
+	cout << "11-Adding 10 Decades is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByXDecadeFaster(Date, 10);
+	cout << "12-Adding 10 Decades (faster) is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByOneCentury(Date);
+	cout << "13-Adding One Century is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = IncreaseDateByOneMillennium(Date);
+	cout << "14-Adding One Millennium is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+
+
+
+
+******************************************************************************************************************
+
+// Problem #33  to #46:
+
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+bool IsLeapYear(int Year)
+{
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+
+}
+
+int NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (int i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+
+bool IsFirstDayInMonth(short Day)
+{
+	return (Day == 1);
+}
+
+bool IsFirstMonthInYear(short Month)
+{
+	return (Month == 1);
+}
+
+stDate DecreaseDateByOneDay(stDate Date)
+{
+	if (IsFirstDayInMonth(Date.Day))
+	{
+		if (IsFirstMonthInYear(Date.Month))
+		{
+			Date.Day = 31;
+			Date.Month = 12;
+			Date.Year--;
+		}
+		else
+		{
+			Date.Month--;
+			Date.Day = NumberOfDaysInMonth(Date.Year,Date.Month);
+			
+		}
+	}
+	else
+	{
+		Date.Day--;
+	}
+
+	return Date;
+}
+
+stDate DecreaseDateByXDays(stDate Date, short Days)
+{
+	for (short i = 0; i < Days; i++)
+	{
+		Date = DecreaseDateByOneDay(Date);
+	}
+	return Date;
+}
+
+stDate DecreaseDateByOneWeek(stDate Date)
+{
+	return DecreaseDateByXDays(Date, 7);
+}
+
+stDate DecreaseDateByXWeeks(stDate Date, short Weeks)
+{
+	for (short i = 0; i < Weeks; i++)
+	{
+		Date = DecreaseDateByOneWeek(Date);
+	}
+
+	return Date;
+}
+
+stDate DecreaseDateByOneMonth(stDate Date)
+{
+	if (Date.Month == 1)
+	{
+		Date.Month = 12;
+		Date.Year--;
+	}
+	else
+	{
+		Date.Month--;
+	}
+
+
+	short NumberOfDaysInCurrentMonth = NumberOfDaysInMonth(Date.Year, Date.Month);
+
+	if (Date.Day > NumberOfDaysInCurrentMonth)
+	{
+		Date.Day = NumberOfDaysInCurrentMonth;
+	}
+	return Date;
+
+}
+
+stDate DecreaseDateByXMonths(stDate Date, short Months)
+{
+	for (short i = 0; i < Months; i++)
+	{
+		Date = DecreaseDateByOneMonth(Date);
+	}
+
+	return Date;
+}
+
+stDate DecreaseDateByOneYear(stDate Date)
+{
+	Date.Year--;
+	return Date;
+}
+
+stDate DecreaseDateByXYears(stDate Date, short Years)
+{
+	for (short i = 0; i < Years; i++)
+	{
+		Date = DecreaseDateByOneYear(Date);
+	}
+	
+	return Date;
+}
+
+stDate DecreaseDateByXYearsFaster(stDate Date, short Years)
+{
+	Date.Year -= Years;
+	return Date;
+}
+
+stDate DecreaseDateByOneDecade(stDate Date)
+{
+	Date.Year -= 10;
+	return Date;
+}
+
+stDate DecreaseDateByXDecades(stDate Date, short Decades)
+{
+	for (short i = 0; i < Decades; i++)
+	{
+		Date = DecreaseDateByOneDecade(Date);
+	}
+
+	return Date;
+}
+
+stDate DecreaseDateByXDecadesFaster(stDate Date, short Decades)
+{
+	Date.Year -= Decades * 10;
+	return Date;
+}
+
+stDate DecreaseDateByOneCentury(stDate Date)
+{
+	Date.Year -= 100;
+	return Date;
+}
+
+stDate DecreaseDateByOneMillennium(stDate Date)
+{
+	Date.Year -= 1000;
+	return Date;
+}
+
+
+
+ 
+الاستدعاء : 
+
+
+
+	stDate Date = ReadFullDate();
+
+	cout << "\nDate After : \n\n";
+
+	Date = DecreaseDateByOneDay(Date);
+	cout << "01-Subtracting one day is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByXDays(Date,10);
+	cout << "02-Subtracting 10 day is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByOneWeek(Date);
+	cout << "03-Subtracting One Week is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByXWeeks(Date,10);
+	cout << "04-Subtracting 10 Week is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByOneMonth(Date);
+	cout << "05-Subtracting One Month is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByXMonths(Date,5);
+	cout << "06-Subtracting 5 Month is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByOneYear(Date);
+	cout << "07-Subtracting One Year is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByXYears(Date,10);
+	cout << "08-Subtracting 10 Years is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByXYearsFaster(Date, 10);
+	cout << "09-Subtracting 10 Years (faster) is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByOneDecade(Date);
+	cout << "10-Subtracting One Decade is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByXDecades(Date, 10);
+	cout << "11-Subtracting 10 Decades is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByXDecadesFaster(Date, 10);
+	cout << "12-Subtracting 10 Decades (faster) is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByOneCentury(Date);
+	cout << "13-Subtracting One Century  is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	Date = DecreaseDateByOneMillennium(Date);
+	cout << "14-Subtracting One Millennium  is : ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+
+
+
+*********************************************************************************************************************
+
+// Problem #47  to #53:
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+bool IsLeapYear(int Year)
+{
+
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+
+}
+
+int NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (int i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.Day == NumberOfDaysInMonth(Date.Year, Date.Month));
+}
+bool IsLastMonthInYear(short Month)
+{
+	return (Month == 12);
+}
+stDate IncreaseDateByOneDay(stDate Date)
+{
+	if (IsLastDayInMonth(Date))
+	{
+		if (IsLastMonthInYear(Date.Month))
+		{
+			Date.Day = 1;
+			Date.Month = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
+	}
+	else
+	{
+		Date.Day++;
+	}
+
+	return Date;
+}
+
+bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
+{
+	return (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month ? Date1.Day < Date2.Day : false)) : false);
+
+}
+int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
+{
+	int Days = 0;
+	while (IsDate1BeforeDate2(Date1, Date2))
+	{
+		Days++;
+		Date1 = IncreaseDateByOneDay(Date1);
+	}
+	return IncludeEndDay ? ++Days : Days;
+}
+
+
+stDate GetSystemDate()
+{
+	stDate Date;
+
+	time_t t = time(0);
+	tm* now = localtime(&t);
+
+	Date.Year = now->tm_year + 1900;
+	Date.Month = now->tm_mon + 1;
+	Date.Day = now->tm_mday;
+
+	return Date;
+
+}
+
+short DayOfWeekOrder(short Year, short Month, short Day)
+{
+	short a = (14 - Month) / 12;
+	short Y = Year - a;
+	short M = Month + (12 * a) - 2;
+
+	// Gregorian :
+	// 0:Sun, 1:Mon, 2:Tue...etc 
+
+	return (Day + Y + (Y / 4) - (Y / 100) + (Y / 400) + ((31 * M) / 12)) % 7;
+
+}
+short DayOfWeekOrder(stDate Date)
+{
+	return DayOfWeekOrder(Date.Year, Date.Month, Date.Day);
+}
+
+string ConvertOrderToDaysName(short DayOfWeekOrder)
+{
+	string arrDays[7] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+
+	return arrDays[DayOfWeekOrder];
+}
+
+bool IsEndOfWeek(stDate Date)
+{
+	return (DayOfWeekOrder(Date) == 6);
+}
+
+bool IsWeekend(stDate Date)
+{
+	short DayIndex = DayOfWeekOrder(Date);
+	return (DayIndex == 5 || DayIndex == 6);
+}
+
+bool IsBusinessDay(stDate Date)
+{
+	//BusinessDay are  Sun,Mon,Tue,Wed and The
+
+	/*short DayIndex = DayOfWeekOrder(Date);
+	return (DayIndex >= 5 && DayIndex <= 4);*/
+
+	//shorter method is to invert the IsWeekEnd: this will save updating code.
+	return (!IsWeekend(Date));
+
+}
+
+short DaysUntilTheEndOfWeek(stDate Date)
+{
+	/* حلي
+	short Counter = 0;
+
+	while (!IsEndOfWeek(Date))
+	{
+		Date = IncreaseDateByOneDay(Date);
+		Counter++;
+	}
+
+	return Counter;*/
+
+	return 6 - DayOfWeekOrder(Date);
+
+}
+
+short DaysUntilTheEndOfMonth(stDate Date)
+{
+	/*حلي
+	short Counter = 0;
+
+	while (!IsLastDayInMonth(Date))
+	{
+		Date = IncreaseDateByOneDay(Date);
+		Counter++;
+	}
+
+	return Counter;*/
+
+	stDate EndMonthDate;
+
+	EndMonthDate.Day = NumberOfDaysInMonth(Date.Year, Date.Month);
+	EndMonthDate.Month = Date.Month;
+	EndMonthDate.Year = Date.Year;
+
+	return GetDifferenceInDays(Date, EndMonthDate);
+}
+
+bool IsLastDayInYear(stDate Date)
+{
+	return (Date.Day == 31 && Date.Month == 12);
+}
+
+
+short DaysUntilTheEndOfYear(stDate Date)
+{
+	 /*حلي
+	short Counter = 0;
+
+	while (!IsLastDayInYear(Date))
+	{
+		Date = IncreaseDateByOneDay(Date);
+		Counter++;
+	}
+
+	return Counter;*/
+
+	stDate EndMonthDate;
+
+	EndMonthDate.Day = 31;
+	EndMonthDate.Month = 12;
+	EndMonthDate.Year = Date.Year;
+
+	return GetDifferenceInDays(Date, EndMonthDate);
+
+}
+
+
+
+الاستدعاء : 
+
+
+
+stDate Date = GetSystemDate();
+	string DayName = ConvertOrderToDaysName(DayOfWeekOrder(Date));
+
+	cout << "Today is , " << DayName << " " <<
+		Date.Day << "/" << Date.Month << "/" << Date.Year << endl;
+
+	//--------------------------------------------
+	cout << "\nIs It End Of Week ?\n";
+
+	if (IsEndOfWeek(Date))
+		cout << "Yes, End Of Week.\n";
+	else
+		cout << "No, Not End Of Week.\n";
+
+
+	
+	//--------------------------------------------
+	cout << "\nIs It Weekend?\n";
+
+	if (IsWeekend(Date))
+		cout << "Yes, It is a week end.\n";
+	else
+		cout << "No, It is Not a week end.\n";
+
+
+	//--------------------------------------------
+	cout << "\nIs it Business Day?\n";
+
+	if (IsBusinessDay(Date))
+		cout << "Yes, It is a Business Day.\n";
+	else
+		cout << "No, It is Not a Business Day.\n";
+	
+	//--------------------------------------------
+	cout << "\nDays Until End Of Week : " << DaysUntilTheEndOfWeek(Date) << " Day(s).\n";
+	cout << "Days Until End Of Month : " << DaysUntilTheEndOfMonth(Date) << " Day(s).\n";
+	cout << "Days Until End Of Year : " << DaysUntilTheEndOfYear(Date) << " Day(s).\n";
+	
+
+
+
+*********************************************************************************************************************
+
+
+
+// Problem #54:
+
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+short DayOfWeekOrder(short Year, short Month, short Day)
+{
+	short a = (14 - Month) / 12;
+	short Y = Year - a;
+	short M = Month + (12 * a) - 2;
+
+	// Gregorian :
+	// 0:Sun, 1:Mon, 2:Tue...etc 
+
+	return (Day + Y + (Y / 4) - (Y / 100) + (Y / 400) + ((31 * M) / 12)) % 7;
+
+}
+short DayOfWeekOrder(stDate Date)
+{
+	return DayOfWeekOrder(Date.Year, Date.Month, Date.Day);
+}
+
+string ConvertOrderToDaysName(short DayOfWeekOrder)
+{
+	string arrDays[7] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+
+	return arrDays[DayOfWeekOrder];
+}
+
+bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
+{
+	return (Date1.Year < Date2.Year) ? true : ((Date1.Year == Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month == Date2.Month ? Date1.Day < Date2.Day : false)) : false);
+
+}
+
+bool IsLeapYear(int Year)
+{
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+
+}
+int NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (int i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.Day == NumberOfDaysInMonth(Date.Year, Date.Month));
+}
+bool IsLastMonthInYear(short Month)
+{
+	return (Month == 12);
+}
+stDate IncreaseDateByOneDay(stDate Date)
+{
+	if (IsLastDayInMonth(Date))
+	{
+		if (IsLastMonthInYear(Date.Month))
+		{
+			Date.Day = 1;
+			Date.Month = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
+	}
+	else
+	{
+		Date.Day++;
+	}
+
+	return Date;
+}
+
+bool IsWeekend(stDate Date)
+{
+	short DayIndex = DayOfWeekOrder(Date);
+	return (DayIndex == 5 || DayIndex == 6);
+}
+
+short CalculateActucalVacationDays(stDate DateFrom, stDate DateTo)
+{
+	short DaysCount = 0;
+
+	while (IsDate1BeforeDate2(DateFrom, DateTo))
+	{
+		
+		if (!IsWeekend(DateFrom))
+			DaysCount++;
+
+		DateFrom = IncreaseDateByOneDay(DateFrom);
+	}
+
+	return DaysCount;
+}
+
+
+
+الاستدعاء : 
+
+
+
+	cout << "Vacation Starts:\n";
+	stDate DateFrom = ReadFullDate();
+
+	cout << "\nVacation Ends:\n";
+	stDate DateTo = ReadFullDate();
+
+
+	cout << "\nVacation From : " << ConvertOrderToDaysName(DayOfWeekOrder(DateFrom)) << " " <<
+		DateFrom.Day << "/" << DateFrom.Month << "/" << DateFrom.Year << endl;
+
+
+	cout << "Vacation To   : " << ConvertOrderToDaysName(DayOfWeekOrder(DateTo)) << " " <<
+		DateTo.Day << "/" << DateTo.Month << "/" << DateTo.Year << endl;
+
+	cout << "\nActucal Vacation Days is : " << CalculateActucalVacationDays(DateFrom, DateTo) << endl;
+
+
+
+*********************************************************************************************************************
+
+
+
+
+// Problem #55:
+
+
+struct stDate
+{
+	short Day;
+	short Month;
+	short Year;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+
+	Date.Day = MyInputLib::ReadPositiveNumber("Please enter a Day ?");
+	Date.Month = MyInputLib::ReadPositiveNumber("Please enter a Month ?");
+	Date.Year = MyInputLib::ReadPositiveNumber("Please enter a Year ?");
+
+	return Date;
+}
+
+short DayOfWeekOrder(short Year, short Month, short Day)
+{
+	short a = (14 - Month) / 12;
+	short Y = Year - a;
+	short M = Month + (12 * a) - 2;
+
+	// Gregorian :
+	// 0:Sun, 1:Mon, 2:Tue...etc 
+
+	return (Day + Y + (Y / 4) - (Y / 100) + (Y / 400) + ((31 * M) / 12)) % 7;
+
+}
+short DayOfWeekOrder(stDate Date)
+{
+	return DayOfWeekOrder(Date.Year, Date.Month, Date.Day);
+}
+
+bool IsLeapYear(int Year)
+{
+	return (Year % 400 == 0 || (Year % 4 == 0 && Year % 100 != 0)) ? true : false;
+
+}
+int NumberOfDaysInMonth(int Year, int Month)
+{
+	if (Month < 1 || Month > 12)
+		return 0;
+
+	if (Month == 2)
+	{
+		return IsLeapYear(Year) ? 29 : 28;
+	}
+
+	short arr31Days[7] = { 1,3,5,7,8,10,12 };
+
+	for (int i = 0; i < 7; i++)
+	{
+		if (arr31Days[i] == Month)
+			return 31;
+	}
+
+	// if you reach here then it's 30 days.
+	return 30;
+
+}
+bool IsLastDayInMonth(stDate Date)
+{
+	return (Date.Day == NumberOfDaysInMonth(Date.Year, Date.Month));
+}
+bool IsLastMonthInYear(short Month)
+{
+	return (Month == 12);
+}
+stDate IncreaseDateByOneDay(stDate Date)
+{
+	if (IsLastDayInMonth(Date))
+	{
+		if (IsLastMonthInYear(Date.Month))
+		{
+			Date.Day = 1;
+			Date.Month = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
+	}
+	else
+	{
+		Date.Day++;
+	}
+
+	return Date;
+}
+
+string ConvertOrderToDaysName(short DayOfWeekOrder)
+{
+	string arrDays[7] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+
+	return arrDays[DayOfWeekOrder];
+}
+
+bool IsWeekend(stDate Date)
+{
+	short DayIndex = DayOfWeekOrder(Date);
+	return (DayIndex == 5 || DayIndex == 6);
+}
+
+
+stDate CalculateVacationReturnDate(stDate DateFrom, short VactionDays)
+{
+	 //حلي
+	/*short VD = VactionDays;
+	
+
+	while (VD > 0)
+	{
+		if (!IsWeekend(DateFrom))
+			VD--;	
+
+		DateFrom = IncreaseDateByOneDay(DateFrom);
+	}
+
+	while (IsWeekend(DateFrom))
+	{
+		DateFrom = IncreaseDateByOneDay(DateFrom);
+	}
+
+	return DateFrom;*/
+
+
+
+	short WeekEndCounter = 0;
+
+	//in case the data  is weekend keep adding one day util you reach business day
+	//we get rid of all weekends before the first business day
+	while (IsWeekend(DateFrom))
+	{
+		DateFrom = IncreaseDateByOneDay(DateFrom);
+	}
+
+	//here we increase the vacation dates to add all weekends to it.
+
+	for (short i = 1; i <= VactionDays + WeekEndCounter; i++)
+	{
+
+		if (IsWeekend(DateFrom))
+			WeekEndCounter++;
+
+		DateFrom = IncreaseDateByOneDay(DateFrom);
+	}
+
+	//in case the return date is week end keep adding one day util you reach business day
+	while (IsWeekend(DateFrom))
+	{
+		DateFrom = IncreaseDateByOneDay(DateFrom);
+	}
+
+	return DateFrom;
+}
+
+
+
+
+الاستدعاء : 
+
+
+cout << "Vacation Starts:\n";
+	stDate DateFrom = ReadFullDate();
+	
+	short VactionDays = MyInputLib::ReadNumber("\nPlease enter vaction days ?");
+
+	stDate DateTo = CalculateVacationReturnDate(DateFrom, VactionDays);
+	
+	cout << "\nReturn Date : " << ConvertOrderToDaysName(DayOfWeekOrder(DateTo)) << " " <<
+		DateTo.Day << "/" << DateTo.Month << "/" << DateTo.Year << endl;
+
+
+
+
+*********************************************************************************************************************

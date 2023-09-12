@@ -1,0 +1,184 @@
+Problem 46 : 
+
+void PrintLettersAtoZ()
+{
+	for (int i = 65; i <= 90; i++)
+	{
+		cout << char(i) << endl;
+	}
+}
+
+
+الاستدعاء : 
+
+
+PrintLettersAtoZ();
+
+*******************************************************************************
+
+
+Problem 47 : 
+
+float ReadPositineNumber(string Message)
+{
+	float Num;
+	do {
+		cout << Message << endl;
+		cin >> Num;
+	} while (Num < 0);
+	return Num;
+}
+
+float TotalMonth(float LoanAmount, float MonthlyInstallment)
+{
+	return (float)LoanAmount / MonthlyInstallment;
+}
+
+
+الاستدعاء : 
+
+	float LoanAmount = ReadPositineNumber("Please enter Loan Amount ?");
+	float MonthlyInstallment = ReadPositineNumber("Please enter Monthly Installment ?");
+
+	cout << "\nTotal Month to pay = " << TotalMonth(LoanAmount, MonthlyInstallment) << endl; 
+
+
+
+*******************************************************************************
+
+
+Problem 48 : 
+
+
+float ReadPositineNumber(string Message)
+{
+	float Num;
+	do {
+		cout << Message << endl;
+		cin >> Num;
+	} while (Num < 0);
+	return Num;
+}
+
+float MonthlyInstallment(float LoanAmount, float HowManyMonth)
+{
+	return (float)LoanAmount / HowManyMonth;
+}
+
+
+الاستدعاء : 
+
+
+
+	float LoanAmount = ReadPositineNumber("Please enter Loan Amount ?");
+	float HowManyMonth = ReadPositineNumber("How Many Months ?");
+
+	cout << "\nMonthly Installment  = " << MonthlyInstallment(LoanAmount, HowManyMonth) << endl;
+
+
+*******************************************************************************
+
+
+
+Problem 49 : 
+
+
+
+string ReadPinCode()
+{
+	string PIN;
+	cout << "Please Enter PIN ?" << endl;
+	cin >> PIN;
+
+	return PIN;
+}
+
+bool Login()
+{
+	string PinCode;
+	do
+	{
+		PinCode = ReadPinCode();
+		if (PinCode == "1234")
+		{
+			return 1; // this will exit the function and return true Login
+		}
+		else
+		{
+			system("color 4f"); // turn screen to red
+			cout << "Wrong PIN !" << endl << endl;
+		}
+
+	} while (PinCode != "1234");
+
+	return 0; //When you reach here this means loin faild
+}
+
+
+الاستدعاء : 
+
+
+	if (Login())
+	{
+		system("color 2f"); // turn screen to green 
+		cout << "\nYour account balance is " << 7500 << endl;
+	}
+	
+
+
+*******************************************************************************
+
+
+
+Problem 50 : 
+
+
+string ReadPinCode()
+{
+	string PIN;
+	cout << "Please Enter PIN ?" << endl;
+	cin >> PIN;
+
+	return PIN;
+}
+
+bool Login()
+{
+	string PinCode;
+	int Counter = 3;
+	do
+	{
+		Counter--;
+		PinCode = ReadPinCode();
+
+		if (PinCode == "1234")
+		{
+			return 1; // this will exit the function and return true Login  
+		}
+		else
+		{
+			system("color 4f"); // turn screen to red
+			cout << "Wrong PIN You have " << Counter << " more tries" << endl << endl;
+		}
+
+	} while (PinCode != "1234" && Counter >= 1);
+
+	return 0; //When you reach here this means loin faild
+}
+
+
+الاستدعاء : 
+
+
+	if (Login())
+	{
+		system("color 2f"); // turn screen to green 
+		cout << "\nYour account balance is " << 7500 << endl;
+	}
+	else
+	{
+		cout << "\nYour card blocked call the bank for help.\n";
+	}
+
+
+*******************************************************************************

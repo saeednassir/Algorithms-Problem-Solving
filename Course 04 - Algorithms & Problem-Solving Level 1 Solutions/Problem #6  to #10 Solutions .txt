@@ -1,0 +1,231 @@
+// Problem 6 : 
+
+struct stInfo
+{
+	string FirstName;
+	string LastName;
+	bool Reversed;
+};
+
+stInfo ReadFullName()
+{
+	stInfo Info;
+
+	cout << "Please enter First Name ? " << endl;
+	cin >> Info.FirstName;
+
+	cout << "Please enter Last Name ? " << endl;
+	cin >> Info.LastName;
+
+	cout << "Do you want to reverse it 1/0 ? " << endl;
+	cin >> Info.Reversed;
+
+
+	return Info;
+}
+
+
+string GetFullName(stInfo Info)
+{
+	string FullName = "";
+
+	if (Info.Reversed)
+		FullName = Info.LastName + " " + Info.FirstName;	
+	else
+		FullName = Info.FirstName + " " + Info.LastName;
+
+	return FullName;
+}
+
+void PrintFullName(string FullName)
+{
+	cout << "\n Your full name is : " << FullName << endl;
+}
+
+// الاستدعاء :
+
+
+PrintFullName(GetFullName(ReadFullName()));
+
+*************************************************************************
+
+// Problem 7 :
+
+int ReadNumber() 
+{
+	int Number;
+
+	cout << "Please enter Number ? \n";
+	cin >> Number;
+
+	return Number;
+
+}
+
+float CalculateHalfNumber(int Number)
+{
+	return (float)Number / 2;
+}
+
+void PrintResult(int Number)
+{
+	string Result =  "Half Of " + to_string(Number) + " is " ;
+	cout << endl << Result << CalculateHalfNumber(Number) << endl;
+}
+
+الاستدعاء : 
+
+PrintResult(ReadNumber());
+
+***********************************************************************
+
+// Problem 8 :
+
+enum enResult{Pass = 1,Fail = 2, WrongMark = 3};
+
+float ReadMark()
+{
+	float Mark;
+	
+	cout << "Please enter mark ? \n";
+	cin >> Mark;
+
+	return Mark;
+}
+
+enResult CheckMark(float Mark)
+{
+	
+	if (Mark >= 50 && Mark <= 100)
+		return enResult::Pass;
+	else if (Mark < 50 && Mark >= 0)
+		return enResult::Fail;
+	else
+		return enResult::WrongMark;
+		
+}
+
+void PrintResultMark(float Mark)
+{
+	if (CheckMark(Mark) == enResult::Pass)
+		cout << "\n Your Passed" << endl;
+	else if (CheckMark(Mark) == enResult::Fail)
+		cout << "\n Your Failed" << endl;
+	else
+		cout << "\n Worng Mark" << endl;
+}
+
+الاستدعاء : 
+
+PrintResultMark(ReadMark());
+
+************************************************************************
+// Problem 9 :
+
+الطريقة الأولى :
+
+struct stNumber
+{
+	int Number1;
+	int Number2;
+	int Number3;
+};
+
+stNumber ReadNumber()
+{
+	stNumber Number;
+
+	cout << "Please enter Number 1 ?\n";
+	cin >> Number.Number1;
+
+	cout << "Please enter Number 2 ?\n";
+	cin >> Number.Number2;
+
+	cout << "Please enter Number 3 ?\n";
+	cin >> Number.Number3;
+
+	return Number;
+}
+
+float CalculateSum(stNumber Number)
+{
+	return Number.Number1 + Number.Number2 + Number.Number3;
+}
+
+void PrintResult(stNumber Number)
+{
+	cout << "\n Sum is " << CalculateSum(Number) << endl;
+}
+
+الاستدعاء : 
+
+PrintResult(ReadNumber());
+
+الطريقة الثانية :
+
+void ReadNumber(int &Num1,int &Num2,int &Num3)
+{
+	
+	cout << "Please enter Number 1 ?\n";
+	cin >> Num1;
+
+	cout << "Please enter Number 2 ?\n";
+	cin >> Num2;
+
+	cout << "Please enter Number 3 ?\n";
+	cin >> Num3;
+
+}
+
+float CalculateSum(int Num1, int Num2, int Num3)
+{
+	return Num1 + Num2 + Num3;
+}
+
+void PrintResult(int Number)
+{
+	cout << "\nThe Total sum of number is : " << Number << endl;
+}
+
+الاستدعاء :
+
+	int num1, num2, num3;
+	ReadNumber(num1, num2, num3);
+	PrintResult(CalculateSum(num1,num2,num3));
+
+
+****************************************************************
+// Problem 10 :
+
+
+void ReadMark (float& mark1, float& mark2, float& mark3)
+{
+	
+	cout << "Please enter Mark 1 ?\n";
+	cin >> mark1;
+
+	cout << "Please enter Mark 2 ?\n";
+	cin >> mark2;
+
+	cout << "Please enter Mark 3 ?\n";
+	cin >> mark3;
+
+}
+
+float CalculateAverage(float mark1, float mark2, float mark3)
+{
+	return (mark1 + mark2 + mark3) / 3;
+}
+
+void PrintAverage(float Average)
+{
+	cout << "\nThe Average  is : " << Average << "%" << endl;
+}
+
+الاستدعاء : 
+
+	float mark1, mark2, mark3;
+	ReadMark(mark1, mark2, mark3);
+	PrintAverage(CalculateAverage(mark1, mark2, mark3));
+
+************************************************************************

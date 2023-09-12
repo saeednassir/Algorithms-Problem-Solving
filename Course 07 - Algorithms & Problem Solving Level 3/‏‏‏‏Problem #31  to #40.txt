@@ -1,0 +1,473 @@
+# Problem 31 : 
+
+
+short CountLetter(string Str, char Character, bool MatchCase = true)
+{
+
+	short Counter = 0;
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+		if (MatchCase)
+		{
+			if (Str[i] == Character)
+				Counter++;
+		}
+		else
+		{
+			if (tolower(Str[i]) == tolower(Character))
+				Counter++;
+		}
+
+	}
+
+	return Counter;
+}
+
+الاستدعاء : 
+
+
+	string Str = MyInputLib::ReadString("Please enter Your String ?");
+
+	char Character = MyInputLib::ReadCharacter("Please Enter a Character ?");
+
+	cout << "Letter \'" << Character << "\' Count = " << CountLetter(Str, Character) << endl;
+
+
+	cout << "Letter \'" << Character << "\' OR \'" << MyStringLib::InvertCharacter(Character) 
+		<<"\' Count = " << CountLetter(Str, Character,false) << endl;
+
+			
+
+***********************************************************************************************************
+
+
+# Problem 32 : 
+
+
+bool IsVowels(char Character)
+{
+	Character = tolower(Character);
+
+	return ((Character == 'a') || (Character == 'e') || (Character == 'i') || (Character == 'o') || (Character == 'u'));
+
+}
+
+الاستدعاء : 
+
+	char Character = MyInputLib::ReadCharacter("Please enter Character ? ");
+
+	
+	if (IsVowels(Character))
+		cout << "Yes Latter \'" << Character << "\' is Vowel.";
+	else
+		cout << "No Latter \'" << Character << "\' is Not Vowel.";
+
+
+
+				********************************
+
+
+# حلي : 
+
+bool IsVowels(char Character)
+{
+	string VowelsCharacters = "aeiou";
+
+	for (short i = 0; i < VowelsCharacters.length(); i++)
+	{
+		if (tolower(Character) == tolower(VowelsCharacters[i]))
+			return true;
+	}
+
+	return false;
+}
+
+الاستدعاء : 
+
+ 
+	char Character = MyInputLib::ReadCharacter("Please enter Character ? ");
+
+	
+	if (IsVowels(Character))
+		cout << "Yes Latter \'" << Character << "\' is Vowel.";
+	else
+		cout << "No Latter \'" << Character << "\' is Not Vowel.";
+
+
+
+***********************************************************************************************************
+
+
+
+# Problem 33 : 
+
+short CountVowelsInString(string Str)
+{
+	short Count = 0;
+
+	for (short i = 0; i < Str.length(); i++)
+	{
+		if (MyStringLib::IsVowels(Str[i]))
+			Count++;
+	}
+
+	return Count;
+}
+
+
+الاستدعاء : 
+
+	string Str = MyInputLib::ReadString("Please enter String ? ");
+
+	cout << "Number of vowels is " << CountVowelsInString(Str) << endl;
+
+
+***********************************************************************************************************
+
+
+
+
+# Problem 34 : 
+
+void PrintVowels(string Str)
+{
+	
+
+	for (short i = 0; i < Str.length(); i++)
+	{
+		if (MyStringLib::IsVowels(Str[i]))
+			cout << Str[i] << "   ";
+	}
+
+}
+
+
+الاستدعاء : 
+
+	string Str = MyInputLib::ReadString("Please enter String ? ");
+
+	cout << "Vowel in string are is : ";
+	PrintVowels(Str);
+	
+
+
+***********************************************************************************************************
+
+
+
+
+# Problem 35 : 
+
+
+void PrintEachWordInString(string Str)
+	{
+		string delim = " "; // delimiter.
+
+		cout << "Your string word are : " << endl;
+
+		short pos = 0;
+		string sWord; // define a string variable. 
+
+
+		// use find() funcation to get the position of the delimiter.  
+		while ((pos = Str.find(delim)) != string::npos)
+		{
+			sWord = Str.substr(0, pos); // store the word
+
+			if (sWord != "")
+				cout << sWord << endl;
+
+			Str.erase(0, pos + delim.length()); // erase() until positon and move to next word. 
+
+
+		}
+
+		if (Str != "")
+			cout << Str << endl; // its print last word of string.
+
+	}
+
+الاستدعاء : 
+
+	string Str = MyInputLib::ReadString("Please enter String ? ");
+	PrintEachWordInString(Str);
+
+
+***********************************************************************************************************
+
+
+
+
+# Problem 36 : 
+
+
+short CountWords(string Str)
+{
+	string delim = " "; // delimiter.
+	short pos = 0;
+	string sWord; // define a string variable. 
+	short Counter = 0;
+
+	// use find() funcation to get the position of the delimiter.  
+	while ((pos = Str.find(delim)) != string::npos)
+	{
+		sWord = Str.substr(0, pos); // store the word
+
+		if (sWord != "")
+			Counter++;
+
+		Str.erase(0, pos + delim.length()); // erase() until positon and move to next word. 
+
+
+	}
+
+	if (Str != "")
+		Counter++; // it counts the last word of the string.
+
+	return Counter;
+
+}
+
+الاستدعاء : 
+
+string Str = MyInputLib::ReadString("Please enter String ? ");
+
+	cout << "The Number of words in your string is : ";
+	cout << CountWords(Str) << endl;
+
+
+***********************************************************************************************************
+
+
+
+
+# Problem 37 : 
+
+
+vector<string> SplitString(string Str, string Delim)
+{
+	short pos = 0;
+	string sword;
+
+	vector<string> vString;
+
+	while ((pos = Str.find(Delim)) != string::npos)
+	{
+		sword = Str.substr(0, pos);
+
+		if (sword != "")
+			vString.push_back(sword);
+
+		Str.erase(0, pos + Delim.length());
+
+	}
+	
+	if (Str != "")
+		vString.push_back(Str);
+
+	return vString;
+
+}
+
+الاستدعاء : 
+
+	vector<string> vString;
+	string Str = MyInputLib::ReadString("please enter String ? ");
+
+	
+	vString = SplitString(Str, " ");
+
+	cout << "Tokens = " << vString.size() << endl;
+
+	for (string& Word : vString)
+	{
+		 cout << Word << endl;
+	}
+
+
+***********************************************************************************************************
+
+
+
+# Problem 38 : 
+
+
+
+
+string TrimLeft(string Str)
+{
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+		if (Str[i] != ' ')
+		{
+			return Str.substr(i, Str.length() - 1);
+		}
+	}
+	return "";
+}
+
+
+string TrimRight(string Str)
+{
+
+	for (int i = Str.length()-1; i >= 0; i--)
+	{
+		if (Str[i] != ' ')
+		{
+			return Str.substr(0,i+1);
+		}
+	}
+
+	return "";
+}
+
+
+string Trim(string Str)
+{
+	return TrimLeft(TrimRight(Str));
+}
+
+
+
+الاستدعاء : 
+
+
+
+	string Str = MyInputLib::ReadString("please enter String ?");
+
+	cout << "Trim Left = " << TrimLeft(Str) << endl;
+	cout << "Trim Right = " << TrimRight(Str) << endl;
+	cout << "Trim = " << Trim(Str);
+
+
+
+
+            		******************************
+
+# حلي : 
+
+
+string TrimLeft(string Str)
+{
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+		if (Str[i] != ' ')
+		{
+			Str.erase(0, i);
+			return Str;
+		}
+	}
+
+	return "";
+
+}
+
+
+string TrimRight(string Str)
+{
+
+	for (int i = Str.length(); i > 0; i--)
+	{
+		if (Str[i-1] != ' ')
+		{
+			Str.erase(i,(Str.length()-1));
+			return Str;
+		}
+	}
+}
+
+
+string Trim(string Str)
+{
+	return TrimLeft(TrimRight(Str));
+}
+
+
+الاستدعاء : 
+
+	string Str = MyInputLib::ReadString("please enter String ?");
+	
+	cout << "Trim Left = " << TrimLeft(Str) << endl;
+	cout << "Trim Right = " << TrimRight(Str) << endl;
+	cout << "Trim = " << Trim(Str);
+
+***********************************************************************************************************
+
+
+
+# Problem 39 : 
+
+string JoinString(vector<string> vString, string Delim)
+{
+	string Str = "";
+
+	for (string& S : vString)
+	{
+		Str += (S + Delim);
+	}
+
+	return Str.substr(0,Str.length()-Delim.length());
+}
+
+
+
+
+الاستدعاء : 
+
+vector<string> vString = { "saeed","mohammed","ali" };
+
+	cout << "Vector after join  : \n";
+
+	cout << JoinString(vString, ",");
+
+
+***********************************************************************************************************
+
+
+
+# Problem 40 : 
+
+string JoinString(vector<string> vString, string Delim)
+{
+	string Str = "";
+
+	for (string& S : vString)
+	{
+		Str += (S + Delim);
+	}
+
+	return Str.substr(0, Str.length() - Delim.length());
+}
+
+string JoinString(string arr[], int Length, string Delim)
+{
+	string Str = "";
+
+	for (int i = 0; i < Length; i++)
+	{
+		Str += arr[i] + Delim;
+	}
+
+	return Str.substr(0, Str.length() - Delim.length());
+}
+
+
+
+الاستدعاء : 
+
+// OverLooding
+	vector<string> vString = { "saeed","mohammed","ali" };
+	string arr[] = { "saeed","ali","Mohammed" ,"Khader","Mosa" };
+
+	cout << "Vector after join  : \n";
+	cout << JoinString(vString, ",");
+
+	cout << "\nArray after join  : \n";
+	cout << JoinString(arr, 5, ",");
+
+
+
+***********************************************************************************************************

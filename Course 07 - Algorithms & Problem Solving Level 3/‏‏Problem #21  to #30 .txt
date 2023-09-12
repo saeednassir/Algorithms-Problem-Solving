@@ -1,0 +1,388 @@
+# Problem 21 : 
+
+
+void PrintFibonacciUsingLoop(int Number) 
+{
+	
+	int Prev1 = 1, Prev2 = 0, FebNumber = 0;
+	cout << "1   ";
+
+	for (int i = 1; i <= Number-1; i++)
+	{
+		FebNumber = Prev1 + Prev2;
+
+		cout << FebNumber << "   ";
+
+		Prev2 = Prev1;
+		Prev1 = FebNumber;
+
+	}
+
+
+}
+
+
+
+الاستدعاء : 
+
+PrintFibonacciUsingLoop(10);
+
+
+***********************************************************************************************************
+
+
+# Problem 22 : 
+
+
+void PrintFibonacciUsingRecurssion(short Number, int Prev1 = 1, int Prev2 = 0)
+{
+	int FebNumber = 0;
+
+	if (Number > 0)
+	{
+		FebNumber = Prev1 + Prev2;
+
+		Prev1 = Prev2;
+		Prev2 = FebNumber;
+
+		cout << FebNumber << "   ";
+
+		PrintFibonacciUsingRecurssion(Number - 1, Prev1, Prev2);
+
+	}
+
+}
+
+الاستدعاء : 
+
+
+PrintFibonacciUsingRecurssion(10);
+
+***********************************************************************************************************
+
+
+
+# Problem 23 : 
+
+void PrintFirstLetterOfEachWord(string Str)
+{
+	bool isFirstLatter = true;
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+
+		if (Str[i] != ' ' && isFirstLatter)
+			cout << Str[i] << endl;
+
+		isFirstLatter = (Str[i] == ' ' ? true : false);
+
+	}
+
+}
+
+
+
+
+الاستدعاء : 
+
+
+PrintFirstLetterOfEachWord(MyInputLib::ReadString("Please Enter Your String ?"));
+	
+
+***********************************************************************************************************
+
+
+
+
+# Problem 24 : 
+
+string UpperFirstLetterOfEachWord(string Str)
+{
+	bool isFirstLatter = true;
+	
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+
+		if (Str[i] != ' ' && isFirstLatter)
+				Str[i] = toupper(Str[i]);
+			
+		isFirstLatter = (Str[i] == ' ' ? true : false);
+
+	}
+
+	return Str;
+
+}
+
+
+
+الاستدعاء : 
+
+
+	string Str = MyInputLib::ReadString("Please Enter Your String ?");
+
+	cout << "\nString After Conversion :" << endl;
+
+	cout << UpperFirstLetterOfEachWord(Str);
+
+***********************************************************************************************************
+
+
+
+
+# Problem 25 : 
+
+string LowerFirstLetterOfEachWord(string Str)
+{
+	bool isFirstLatter = true;
+	
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+
+		if (Str[i] != ' ' && isFirstLatter)
+				Str[i] = tolower(Str[i]);
+			
+		isFirstLatter = (Str[i] == ' ' ? true : false);
+
+	}
+
+	return Str;
+
+}
+
+
+
+الاستدعاء : 
+
+
+	string Str = MyInputLib::ReadString("Please Enter Your String ?");
+
+	cout << "\nString After Conversion :" << endl;
+
+	cout << LowerFirstLetterOfEachWord(Str);
+
+
+***********************************************************************************************************
+
+
+
+
+# Problem 26 : 
+
+
+string LowerAllString(string Str)
+{
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+		Str[i] = tolower(Str[i]);
+	}
+
+	return Str;
+
+}
+
+string UpperAllString(string Str)
+{
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+		Str[i] = toupper(Str[i]);
+	}
+
+	return Str;
+
+}
+
+
+
+الاستدعاء : 
+
+	string Str = MyInputLib::ReadString("Please Enter Your String ?");
+
+	cout << "\nString After Lower :" << endl;
+	cout << LowerAllString(Str);
+
+
+	cout << "\n\nString After Upper :" << endl;
+	cout << UpperAllString(Str);
+	
+
+
+***********************************************************************************************************
+
+
+
+
+# Problem 27 : 
+
+
+char InvertCharacter(char Character)
+{
+	return isupper(Character) ? tolower(Character) : toupper(Character);
+}
+
+
+الاستدعاء : 
+
+	char Character = MyInputLib::ReadCharacter("Please enter a Character ?");
+
+	cout << "Character after invert case :\n";
+
+	Character = InvertCharacter(Character);
+	cout << Character << endl;
+
+
+
+***********************************************************************************************************
+
+
+
+# Problem 28 : 
+
+string InvertAllStrngLettersCase(string Str)
+{
+	for (int i = 0; i < Str.length(); i++)
+	{
+		Str[i] = MyStringLib::InvertCharacter(Str[i]);
+	}
+
+	return Str;
+}
+
+
+الاستدعاء : 
+
+string Str = MyInputLib::ReadString("Please enter a String ?");
+
+	cout << "String after invert all latters case :\n";
+
+	Str = InvertAllStrngLettersCase(Str);
+	cout << Str << endl;
+
+
+***********************************************************************************************************
+
+
+
+# Problem 29 : 
+
+int CountCapitalLetters(string Str)
+{
+	int CapitalCounter = 0;
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+		if (isupper(Str[i]))
+			CapitalCounter++;
+	}
+
+	return CapitalCounter;
+}
+
+int CountSmallLetters(string Str)
+{
+	int SmallCounter = 0;
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+		if (islower(Str[i]))
+			SmallCounter++;
+	}
+
+	return SmallCounter;
+}
+
+
+
+الاستدعاء : 
+
+string Str = MyInputLib::ReadString("Please enter Your String ?");
+
+	cout << "\nString Length = " << Str.length() << endl;
+
+	cout << "Capital Letters Count = " << CountCapitalLetters(Str) << endl;
+	cout << "Small Letters Count = " << CountSmallLetters(Str) << endl;
+
+
+الطريقة الثانية لمشكلة 29 : 
+
+enum enWhatToCount { SmallLatters = 0 , CapitalLatters = 1 , All = 2 , Digit = 3 , Punct = 4};
+
+
+int CountLatters(string Str, enWhatToCount WhatToCount = enWhatToCount::All)
+{
+
+	if (WhatToCount == enWhatToCount::All)
+		return Str.length();
+
+
+
+	int Count = 0;
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+		if (WhatToCount == enWhatToCount::CapitalLatters && isupper(Str[i]))
+			Count++;
+
+		if (WhatToCount == enWhatToCount::SmallLatters && islower(Str[i]))
+			Count++;
+
+		if (WhatToCount == enWhatToCount::Digit && isdigit(Str[i]))
+			Count++;
+
+		if (WhatToCount == enWhatToCount::Punct && ispunct(Str[i]))
+			Count++;
+
+	}
+	
+	return Count;
+}
+
+
+
+الاستدعاء : 
+
+
+string Str = MyInputLib::ReadString("Please enter Your String ?");
+
+	cout << "\nString Length = " << CountLatters(Str, enWhatToCount::All) << endl;
+
+	cout << "Capital Letters Count = " << CountLatters(Str, enWhatToCount::CapitalLatters) << endl;
+	cout << "Small Letters Count = " << CountLatters(Str, enWhatToCount::SmallLatters) << endl;
+	cout << "Digit Count = " << CountLatters(Str, enWhatToCount::Digit) << endl;
+	cout << "Punct Count = " << CountLatters(Str, enWhatToCount::Punct) << endl;
+
+***********************************************************************************************************
+
+
+
+# Problem 30 : 
+
+short CountLetter(string Str, char Character)
+{
+	short Counter = 0;
+
+	for (int i = 0; i < Str.length(); i++)
+	{
+		if (Str[i] == Character)
+			Counter++;
+	}
+
+	return Counter;
+}
+
+
+الاستدعاء : 
+
+	string Str = MyInputLib::ReadString("Please enter Your String ?");
+
+	char Character = MyInputLib::ReadCharacter("Please Enter a Character ?");
+
+	cout << "Letter \'" << Character << "\' Count = " << CountLetter(Str, Character) << endl;
+	
+
+
+***********************************************************************************************************

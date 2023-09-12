@@ -1,0 +1,9 @@
+﻿  QueueLine.cpp
+H:\C++\13 - Algorithms & Problem Solving Level 5\Project 8\QueueLine\QueueLine\clsString.h(39,25): warning C4267: 'return': conversion from 'size_t' to 'short', possible loss of data
+H:\C++\13 - Algorithms & Problem Solving Level 5\Project 8\QueueLine\QueueLine\clsString.h(44,29): warning C4267: 'return': conversion from 'size_t' to 'short', possible loss of data
+H:\C++\13 - Algorithms & Problem Solving Level 5\Project 8\QueueLine\QueueLine\clsString.h(56,30): warning C4267: '=': conversion from 'size_t' to 'short', possible loss of data
+H:\C++\13 - Algorithms & Problem Solving Level 5\Project 8\QueueLine\QueueLine\clsString.h(193,29): warning C4267: 'return': conversion from 'size_t' to 'short', possible loss of data
+H:\C++\13 - Algorithms & Problem Solving Level 5\Project 8\QueueLine\QueueLine\clsString.h(324,30): warning C4267: '=': conversion from 'size_t' to 'short', possible loss of data
+H:\C++\13 - Algorithms & Problem Solving Level 5\Project 8\QueueLine\QueueLine\clsString.h(372,22): warning C4267: 'initializing': conversion from 'size_t' to 'short', possible loss of data
+H:\C++\13 - Algorithms & Problem Solving Level 5\Project 8\QueueLine\QueueLine\clsQueueLine.h(111,30): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  QueueLine.vcxproj -> H:\C++\13 - Algorithms & Problem Solving Level 5\Project 8\QueueLine\x64\Debug\QueueLine.exe
